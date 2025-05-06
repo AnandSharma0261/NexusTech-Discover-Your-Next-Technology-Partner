@@ -1,0 +1,3422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#00b4d8">
+    <title>Tech Company Directory</title>
+    <style>
+        :root {
+            --primary-color: #00b4d8;
+            --secondary-color: #9e2a2b;
+            --accent-color: #ffb5a7;
+            --light-accent: #ffcad4;
+            --light-bg: #f8fafc;
+            --dark-text: #1e293b;
+            --light-text: #64748b;
+            --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --container-width: 1280px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--accent-color), var(--light-accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: 800;
+            font-size: 24px;
+            color: var(--secondary-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+        }
+        
+        .search-container {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        
+        #search {
+            padding: 16px 24px;
+            width: 100%;
+            max-width: 600px;
+            border: 2px solid #e2e8f0;
+            border-radius: 100px;
+            font-size: 1.125rem;
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+            background-color: white;
+        }
+        
+        #search:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        .filter-container {
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 16px;
+        }
+        
+        .alpha-filter {
+            background: linear-gradient(145deg, #ffffff, var(--light-accent));
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 0.975rem;
+            min-width: 44px;
+            text-align: center;
+        }
+        
+        .alpha-filter:hover, .alpha-filter.active {
+            background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .companies-grid.list-view {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .companies-grid.list-view .company-card {
+            display: flex;
+            align-items: center;
+            max-width: 100%;
+        }
+
+        #view-toggle {
+            background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: var(--transition);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #view-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .company-card {
+            background: linear-gradient(145deg, #ffffff, var(--light-accent));
+            border-radius: 12px;
+            padding: 24px;
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        
+        .company-card:hover {
+            transform: translateY(-4px);
+            background: linear-gradient(145deg, #ffffff, var(--accent-color));
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        
+        .company-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--primary-color);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .company-card:hover::before {
+            transform: scaleY(1);
+        }
+        
+        .company-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .company-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(145deg, var(--accent-color), var(--light-accent));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .companies-grid:not(.list-view) .company-card {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .companies-grid:not(.list-view) .company-logo {
+            margin-right: 0;
+            margin-bottom: 12px;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+        }
+        
+        .letter-section {
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .letter-heading {
+            font-size: 2rem;
+            padding: 16px 0;
+            border-bottom: 3px solid var(--primary-color);
+            margin-bottom: 24px;
+            color: var(--primary-color);
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            /* Add standard and vendor prefixes for background-clip */
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            -ms-background-clip: text;
+            -o-background-clip: text;
+            background-clip: text;
+            /* Add color fill properties with vendor prefixes */
+            -webkit-text-fill-color: transparent;
+            -moz-text-fill-color: transparent;
+            color: transparent; /* Fallback for older browsers */
+            position: sticky;
+            top: 0;
+            background-color: rgba(248, 250, 252, 0.95);
+            z-index: 10;
+            backdrop-filter: blur(8px);
+            font-weight: 700;
+        }
+
+        /* Add fallback for browsers that don't support background-clip */
+        @supports not (background-clip: text) {
+            .letter-heading {
+                background: none;
+                color: var(--primary-color);
+                -webkit-text-fill-color: var(--primary-color);
+                -moz-text-fill-color: var(--primary-color);
+            }
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 64px;
+            padding: 32px;
+            color: var(--light-text);
+            border-top: 1px solid #e2e8f0;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            transition: var(--transition);
+            opacity: 0;
+            pointer-events: none;
+            font-size: 1.25rem;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .companies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            
+            h1 {
+                font-size: 2.25rem;
+            }
+            
+            header {
+                padding: 32px 20px;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .companies-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .alpha-filter {
+                padding: 8px 16px;
+                font-size: 0.875rem;
+            }
+            
+            h1 {
+                font-size: 1.875rem;
+            }
+            
+            #search {
+                font-size: 1rem;
+                padding: 12px 20px;
+            }
+            
+            .letter-heading {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <div class="logo">NT</div>
+                <h1>NexusTech</h1>
+            </div>
+            <p>Discover Your Next Technology Partner</p>
+        </header>
+        
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search for a company...">
+        </div>
+        
+        <div class="filter-container" id="alpha-filters">
+            <!-- Will be populated by JavaScript -->
+        </div>
+        
+        <div id="company-listings">
+            <!-- Will be populated by JavaScript -->
+        </div>
+        
+        <footer>
+            <p>&copy; 2025 Tech Company Directory. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <div class="back-to-top" id="back-to-top">↑</div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Original company data from the text file
+            const companyData = `IGT Solutions
+Newgen Software 
+FanCraze
+CredFlow
+Company Name :-    Hyderabad
+ 
+JLL Technologies
+1. iSpace Software Solutions India Pvt Ltd
+2.OTSI
+SourceFuse
+iCIMS
+Rakuten Symphony
+PayNways
+Experian
+Vimeo
+Zinnia
+LiaPlus AI
+GAMMASTACK
+ 
+3.SAP CallidusCloud
+4.iConcept Software Services Pvt. Ltd
+5. Quadrant Technologies Pvt. Ltd
+6.Oracle India Private Limited
+7.EverestDX India Pvt Ltd
+Vuesol Software Solutions Pvt. Ltd
+QUALIZEAL TECHNOLOGIES INDIA PRIVATE LIMITED
+DigitalTrust Technologies
+TechB Softwares LLP
+Prism IT Solutions Pvt. Ltd.
+GeekyWorks IT Solutions Pvt. Ltd - 
+Bitsmith Technologies Private Limited
+Twig Software Solutions Private Limited - 
+Midbrains Technologies
+Quick Heal Technologies Limited
+Zensoft Services Pvt. Ltd
+Dss Systems & Software Technologies Pvt. Ltd. 
+
+
+
+
+
+Gurugram
+SyanSoft Technologies
+Akoode Technology -  hr@akoode.in
+Sage Software Solutions Pvt Ltd
+Q3 Technologies - careers@q3tech.com
+ Essence Software Solutions Pvt. Ltd - 
+OrangeMantra
+Mobibiz
+SOTI
+
+Thinkitive Technologies Private Limited ****
+Techechelons Infosolutions Pvt ltd****
+ScroBits Technologies**
+Cympac Software Solutions Pvt Ltd -  careers@cympac.com
+CoreView Systems Private Limited**
+Omniscient Software Pvt. Ltd**
+Coupa Software India Pvt. Ltd
+Zenture IT Solutions**
+Lonar Technologies - 
+IT Gurus Software
+Extentia
+MPLUSSOFT**
+GS Lab
+Synkrama Technologies**
+New Indictrans Technologies Pvt. Ltd
+Collin IT Solution**
+QuicSolv Technologies Pvt. Ltd**
+rtCamp Solutions Private Limited***
+Panacea Infotech Pvt. Ltd**
+Zensoft Services Pvt. Ltd*
+Naksh Technologies - 
+Zainton Technologies 
+Explicate Technologies
+Infotek Software & Systems Private Limited
+Sinewave
+Magic Software - 
+Softdel Systems Pvt. Ltd **
+Ameya Software
+Retailware Softech Pvt Ltd - 
+Brillanz Software Solutions **
+Noetic Labs - careers@noetic-labs.com
+Edreamz Technologies Pvt. Ltd*
+IVS SOFTWARE
+SoftLink International Private Limited - 
+Noetic Labs
+OCTOEDGE TECHNOLOGIES
+Naksh Technologies
+Modular Infotech Pvt. Ltd -  
+Mithi Software Technologies Private Limited*
+Edzeal Technologies
+Quickensol IT Solutions LLP
+InnovaPoint Infotech Pvt. Ltd - 
+Sankalp Computer & Systems Pvt. Ltd. - 
+Left Right Mind
+Impulse Technologies
+Synechron Technologies Pvt. Ltd
+Leometric Technology*
+Digital Group Infotech Pvt. Ltd*
+Ansys Software Pvt. Ltd
+Pure Technology*
+Searce*
+Websym Technologies - 
+CloudRedux*
+Mannara Technologies Pvt. Ltd.
+Vebsigns Technologies*
+NeoSOFT
+Deepminds Infotech Private Limited* - 
+Harbinger Group
+Chirpn IT Solutions*
+Fulcrum Worldwide*
+P99SOFT Pvt Ltd*
+Bpointer* - 
+Montcrest Software Pvt. Ltd - 
+TechNeutron
+Crave InfoTech
+Lnsys Technologies*
+Bitscisys
+Sterling Technolabs Pvt. Ltd*
+Red Bixbite Solutions Private Limited*
+Climate Connect Technologies*
+NICE
+Dalmet Technologies Pvt. Ltd
+Magneto IT Solutions*
+Keshri EduTech Private Limited*
+Radical Technologies
+SteepGraph Systems Pvt Ltd
+C2L BIZ Solutions Private Limited
+Expleo*
+Stelo Technology* - 
+Tricentis
+Salt Technologies
+ScriptsHub Technologies Pvt. Ltd
+Neeyamo Enterprise Solutions
+CentraLogic
+Futurism Technologies
+Prometteur Solutions Pvt Ltd - hr@prometteursolutions.com
+Groots Software Technologies Pvt Ltd.*
+Nabla Infotech
+Assimilate Technologies Pvt Ltd
+Enzigma Solutions LLP
+Aloha Technology -  
+Greytip Software Private Limited
+Uberall Solutions (I) Limited
+Mobiloitte Technologies India Pvt. Ltd
+PillerSoft Technology
+PatSeer Technologies Pvt Ltd - 
+Benchmark IT Solutions
+Apptware Solutions 
+winzo
+Hubilo
+HomeLane
+Hackerrank
+SUGAR
+mCaffeine
+Bizongo 
+BankBazaar India
+prograp -  *
+zolve
+Inshorts
+wakefit
+Zypp Electric
+zupee
+Fino Payments Bank Ltd
+Servify -  
+citymall
+betterplace
+chalo 
+DeHaat
+greyorange
+Credgenics
+Pixxel
+classplus
+Teachmint
+refyne
+loginext
+clear
+
+Kissht
+renewbuy
+cashfree payments
+awfis
+dhan
+Mswipe Technologies Pvt. Ltd
+cuemath
+leap
+wework
+Indeqube
+Ecom Express Limited
+waycool
+juspay -  
+absolute
+aequs
+Lendingkart
+yulu
+scripbox -  
+Rupeek
+stanza living
+Scaler
+Brightchamps
+arya.ag
+shadowfax
+kreditbee
+smartron
+ixigo
+porter
+simple ai
+ninjacart
+adda247
+datalabs
+Sarvatra Technologies Pvt. Ltd -  
+Bitwise Solutions Pvt. Ltd
+Aretove Technologies
+Attento Technologies Private Limited
+Prorigo Software Pvt. Ltd -  mailto:
+Mobicule Technologies Ltd
+Upperthrust Technologies Private Limited
+Mobisoft Infotech Pvt Ltd
+PatSeer Technologies Pvt Ltd - hr@patseer.com
+ASDR Infotech*
+Travitons Technologies Pvt. Ltd.
+Verinite Technologies Pvt Ltd
+TechVerito Software Solutions LLP
+Rssquarz Tech Solutions Pvt. Ltd
+Biz4Solutions - mailto:
+Zerebral IT Solutions Pvt Ltd
+SOFTENGER
+Wishtree Technologies LLP
+Ignitiv Technologies
+Rayden Interactive
+Mindstix Software Labs Pvt. Ltd - 
+Sydler Technologies
+Lonar Technologies Private Limited
+Thinking Hut IT Solutions Pvt Ltd
+Inteliment
+Khodape Software
+Saksoft Limited 
+Dexoit Labs Pvt. Ltd
+Golden Petals Technologies
+Codenera
+Roxiler Systems
+Thinkbridge Software Pvt Ltd
+CAVISTA Technology Private Limited
+ShopWorx
+WEQ Technologies - 
+Prescient Technologies
+Metta Social solutions Pvt Ltd
+FlytBase
+CoReCo Technologies Private Limited
+OneRoof Technologies
+Invezza Technologies Pvt. Ltd
+Xperate
+Hummingbird web solutions
+Leanquality Solutions India Pvt. Ltd
+Major IT Hubs in Pune (Consolidated)
+
+Western Pune IT Corridor
+
+Hinjewadi IT Park (Phases 1, 2, and 3)
+Baner-Balewadi area
+Talawade IT Park
+
+
+Eastern Pune IT Hub
+
+Kharadi (EON IT Park, World Trade Center, Knowledge Park)
+Viman Nagar
+Yerwada (including Commerzone IT Park)
+
+
+Central-East Pune IT Belt
+
+Magarpatta City
+Hadapsar
+Kalyani Nagar
+
+
+Central-West Pune IT Zone
+
+Senapati Bapat Road
+Kothrud
+
+atos
+Fujitsu Consulting
+COGNOZA TECHNOLOGIES
+mphasis
+Maxxzoom India Pvt. Ltd
+PTC
+Ambit Software
+Tech Mahindra
+PHN Technology Pvt. Ltd
+Appzia Technologies
+ProMobi Technologies
+QuicSolv Technologies Pvt. Ltd
+InfoBeans Technologies Limited
+Sagitec Solutions Private Limited
+Vicon Security Tech Pvt. Ltd
+MPLUSSOFT
+Coditas
+Verificient Solutions Private Limited
+Decos Software Development Pvt Ltd
+RadarSoft Technologies LLP
+AST LLC
+Yugensys Software -  ta@yugensys.com
+VTEST Software Pvt. Ltd
+Apconic Software Pvt Ltd
+ThinkOwl India
+Mobicloud Technologies Pvt Ltd
+Vishwayon Software Private Limited
+CodeBlaze
+Cybage Software
+EPPS Infotech Pvt. Ltd
+TwoDots Software Services (OPC) Private Limited
+Securonix
+Irth Solutions India pvt ltd
+Ignite Solutions
+Aimtoz technologies Pvt Ltd
+Felix IT Systems
+malomatia India Technology Services Private Limited
+Tripstack.com
+Altius Data Solutions
+Nihilent Ltd
+Plus91 Technologies Pvt Ltd
+Rysun Labs Private Limited
+Programmers.io
+Synpulse India Pvt Ltd
+Lera Technologies Pvt. Ltd
+PeerLogic Systems
+Hashbyte Studio Pvt Ltd
+Nautilus Mobile App Pvt Ltd
+ZentrumHub
+E42 (Light Information Systems)
+Synoptek India Pvt. Ltd.
+Slk Software Services Pvt Ltd
+Opus Technologies
+Cadence Design Systems Pvt Ltd
+MangoApps
+Phi Commerce Private Limited
+NVIDIA Graphics Pvt Ltd
+TIBCO Software India Pvt. Ltd
+HCLTech
+Mobikode Software Private Limited
+Cerillion Technologies (I) Pvt. Ltd.
+Cloudaeon Pvt. Ltd.
+Systems Plus Private Limited
+UPS Solutions
+Tata Elxsi Ltd
+Bentley Systems
+Teradata
+Panacea Infotech Pvt. Ltd
+Capita
+EXL Service Hadapsar
+Amdocs
+Avaya India Pvt. Ltd
+Neova Solutions
+Qualitas IT Pvt Ltd
+starcentauri technologies pvt Pvt
+Hitachi Consulting India
+Clarion Technologies
+SysTools Software Pvt. Ltd
+Hoonartek
+Techsum Software Solutions
+NewVision Software
+Alcrucis
+LogiQuad Solutions Pvt Ltd
+Red Orange Technologies Pvt. Ltd
+Zionit Software Pvt Ltd
+Cybernetics Software Pvt.Ltd
+Aress Software & Education Technologies (P) Ltd
+Codaemon Softwares Private Limited
+Silicon Stack
+Eton Technologies
+
+
+                                                                Noida
+AbyM Technology
+UKG
+Heureux Software Solutions
+Taksh IT Solutions Private Limited
+Fleek IT Solutions
+Nucleus Software
+Tavant
+Hack Planet Technologies
+Xperience Infinite Soft. Tech. Pvt. Ltd
+IQ INFOTECH & CO
+Infozion Technologies
+AKS WebSoft
+Nexthoughts Software Technologies Pvt Ltd
+TechPerspect Software Private Limited
+AcubeApps Technologies Pvt. ltd
+ThinkSys Software Private Limited
+Lefresco
+Vidyatech Solutions Pvt. Ltd
+Excelsoft Technologies Ltd
+Gobuzy
+Baniwal Infotech
+Virtuzo Infosystems Pvt. Ltd
+BinaryMetrix
+Happiest Minds Technologies Limited
+ClassHose
+EZOPS Inc
+Wizard Infoways Pvt. Ltd
+TechAhead
+Bhavna Corp. 
+Ucodice Technologies IT Company
+Lumen Technologies
+Yantrikas Technologies Pvt. Ltd
+SumoLogic
+Finoit Technologies
+Logisch Technologies Pvt. Ltd
+Edneed Technology Pvt. Ltd
+Uveous Softtech Pvt. Ltd
+GlobalTechSavy Technology
+Ultrashield Technology
+Sparx IT Solutions
+BANGMETRIC LLC
+LUMINA DATAMATICS
+Affinitive technologies
+Vapronix Web Pvt. Ltd
+Appzlogic Mobility Solutions Pvt. Ltd
+TechRyde Inc.
+DXC Technology
+Kasper Infotech Pvt Ltd
+Fiserv India Pvt Ltd
+Vir Softech Pvt. Ltd
+ATH Infosystems Pvt. Ltd
+Bluelupin Technologies Private Limited
+Arttha
+Impledge Technologies
+Gunaatita
+CSG Technosol Pvt Ltd
+TopCubit IT Services Pvt. Ltd
+Proptimise Technology
+UXDLAB Software
+Artech Infosystems 
+Technopolis IT Hub
+CodeGenIT Private Limited
+Kenbox Technologies Pvt Ltd
+FinTechLabs
+Scrowbotech Solutions
+Netcomm Labs Pvt Ltd
+Zen Software Solutions Private Limited
+Kalolytic
+Stefanini India Pvt Ltd
+Shine Web Solutions Pvt. Ltd
+Zeta**
+Kickr Technology
+Benthon Labs Pvt Ltd
+Intrics Solutions Pvt Ltd
+GrapeCity India Private Limited
+Lumiq
+SaaS Labs
+TechnoData Analytics
+Syncrasy Technologies Private Limited
+Crowe Horwath LLP
+Umbrella Infocare Pvt. Ltd
+Dextrous Infosolutions Pvt. Ltd
+Binary Informatics
+DOTWEB INNOVATION
+Speqto Technologies Pvt. Ltd
+Innopact Technologies Private Limited
+SOSUDA TECH
+LambdaTest
+Black Basil Technologies
+Valiance Solutions
+TechMatrix IT Consulting Pvt. Ltd
+Rubix Technologies
+Nuage Biztech Private Limited
+Beganto Software Solutions
+Pay2All
+MediaTek India Technology Pvt. Ltd
+Techgig
+Esri India Technologies Private Limited
+Delphix India
+Appinteg Pvt. Ltd
+THALES
+Diziocean Softwares Private Limited
+Celetel Technologies Private Limited
+FranConnect
+Fusion Techware Pvt. Ltd
+eightfold.ai
+MoneyMul Technologies
+Double S Technologies LLP
+Evolve Digitas
+KritiKal Solutions
+Magic EdTech
+Kapylon
+ANR Software Private Limited
+Shadow infosystem(P) Limited
+Velocity Software Solutions Pvt. Ltd
+Fadsan Technologies Private Limited
+TechConfer Technologies
+Tekniko Global
+BrancoSoft
+Nixxit IT Solutions
+Ginete Technologies
+Clavis Technologies Pvt. Ltd
+Instant IT Technology
+Techstreet Solutions Pvt. Ltd
+Xotiv Technologies Pvt. Ltd
+Inctra Software
+Eastern Software Solutions Pvt. Ltd
+Redian Software
+Shivit Technologies
+Extreme Agile Pvt. Ltd
+Insightful Technologies
+CLOUD ANALOGY 
+Coregenic Softwares
+TouchTechSoftware
+Ennovations Techserv Pvt. Ltd
+Path Infotech Limited
+Macreel Infosoft Pvt. Ltd
+CAN Technologies
+Sparx IT Solutions
+Appsums
+Wizweb IT Solutions Private Limited
+Protobug Technologies Pvt. Ltd
+Red Cube Infotech Pvt. Ltd
+Cloud Infotech Pvt. Ltd
+Efsolit Technology Private Limited
+Pinnacle Technology
+BDSD Technology
+IDS Logic Pvt Ltd
+Intigate Technologies
+Zaptas technologies Pvt. Ltd
+Graygraph Technologies Pvt Ltd
+MobileCoderz
+iBoss Tech Solutions Pvt. Ltd
+Sonet Microsystems
+Depex Technologies
+Spacelinkers Infotech Private Limited
+iByte Infomatics Pvt. Ltd
+Billfree Labs Private Limited
+HyTech Professionals India Pvt Ltd
+Outworks Solutions Pvt. Ltd
+Recenturesoft Infotech Pvt Ltd
+YoekiSoft Pvt. Ltd
+Alobha Technologies Pvt Ltd
+Atnosoft Technologies Pvt Ltd
+Ozdocs India Pvt. Ltd
+BizBrolly Solutions
+RAMBEE Softech Pvt Ltd 
+Chetu India Pvt Ltd
+IT TRAILBLAZERS
+Webzent Technologies
+Cogniscient Business Solutions Pvt. Ltd.
+TechnoSapphire Research Pvt Ltd
+Mawai Infotech Ltd
+Mobrilz Private Limited
+eSearch Logix
+Persystent Software Solutions Pvt. Limited
+Data Nova India Private Limited
+Innover Digital
+Europa Technosoft Pvt. Ltd
+Saikshav Technology
+Expedite Software Services
+Avya Technology Private Limited
+Tevatron Technologies
+SAMRAT TECHSERV PVT.LTD
+Outright Systems Pvt. Ltd
+Minds Task Technologies
+Droisys India Private Limited
+Cyber Matrix Solutions
+Xatcovis Solutions Private Limited
+ENS Enterprises Private Limited
+Jaikvik Technology India Pvt. Ltd
+Xonier Technologies
+Kulsys Technologies
+Brickredsys India Private Limited
+AMY Softech Pvt LTD
+Routa Digital India
+Smalsus Infolabs Pvt. Ltd.
+TechEsperto Solutions Private Limited
+Lavi Software & Technology Pvt. Ltd
+Algoscale
+WorkLooper Consultants
+Ojas Softech Pvt Ltd
+Voto Technologies Service
+LNBIRD Technology
+Twirll India
+Daksh Technology
+Tech Zenon IT Solutions Pvt. Ltd
+TecOrb Technologies Pvt. Ltd
+TapMo India Pvt. Ltd.
+Amity Software Limited
+Trignodev Softwares Pvt Ltd
+HangingPanda Pvt. Ltd
+Copperchips
+Synergy Softwares Ltd
+Tanaashi Technologies Pvt Ltd
+Plaxonic Technologies
+R Systems International
+W3villa Technologies Pvt. Ltd
+SDET Tech Pvt. Ltd
+genpact
+ISHIR
+BorderlessMind Technologies
+Appventurez
+Saraca Solutions
+HashStudioz Technologies
+Catabatic Technology
+Xaltam Technologies
+Nucleus Software 
+Binmile
+Hard Shell Technologies
+Abhiman
+Bytesview Analytics
+Nicox IT Solutions
+Softindigo
+Webnmobapps Solutions
+Jellyfish Technologies
+TechnoGripper Solutions
+WebBee Global
+TrackOlap
+Tech Mahindra
+Farziengineer
+Actolap Solutions
+3Pillar Global
+Agatsa Software
+Orbit9 IT Solutions
+Appther Technologies
+Greenusys Technology
+Stashlar Technologies 
+HCLTech
+FCI CCM
+Innovation Technology
+ANSYS Software
+Successive Digital
+North Shore Technologies 
+MoMagic Technologies
+Gojoko Technologies
+Snap-on Business
+FarEye Technologies
+Altran
+KritiKal Solutions
+InfoAxon Technologies
+SNeT Labs 
+TopSqill
+Vinove Software and Services
+Oracle
+TechChefz Digital 
+Awesomify Technologies
+Yatiken Software
+EXL
+TO THE NEW
+GlobalLogic
+Optum Global Solutions
+Publicis Sapient
+NTT DATA 
+SAMSUNG
+GRPS Lab
+NEC Corporation
+Big Oh Notation
+Fourbrick Technology
+Webkul
+Ginger
+Quadrafort Technologies
+Bright Technologies
+LiangTuang Technologies
+Codegraphi Technology
+Masthead Technologies
+Microhub Technologies
+Codeacious Technologies
+Amibba Systems
+IQ-Line
+Ajeevi Technologies
+Evangelist technology
+Nippon Data 
+Soltrix Technology
+KPMG
+Hexadecimal Software
+PrismHR
+Iris Software
+Veratas
+Appilary Technologies
+Appnox Technologies
+Veersa Technologies
+iDreamBiz
+Siemens
+Daloopa
+CFCS Cloud Solutions
+Xavient Digital
+Mariox Software
+Edvora
+Infinity Soft
+Terasol Technologies
+Tathata Infotech
+oxymoney
+Cyient 
+Markstein Technology
+CodeAspire 
+RMSI
+AIG Technologies
+SDG Software
+Drabito Technologies
+Cybetiq
+Provana
+Acro Technologies
+Cadence design Systems
+Zivost Technologies
+Grepix Infotech
+CHL Softech
+Dixon Technologies
+AKS WebSoft
+BESOLVE
+AgreeYa Solutions
+Orrizonte Technologies 
+Opalina Technologies
+Logictech Solutions
+Newgen Software
+Srishta Technology
+NASCORP TECHNOLOGIES
+Crestech Software
+Omefyi Software Technologies
+Apparrant Technologies
+Technoarch Softwares
+Eduzent Infotech Private Limited
+Omnie Solutions
+Mantreza Technologies
+Emids
+Quickway Infosystems
+AbyM Technology
+Knoldus Inc
+Scriza
+SP Technosoft
+Birlasoft 
+KiwiTech
+VAYUZ Technologies
+Eigerlab Technologies
+Webicules Technology
+Quokka Labs
+Heureux Software
+Blue Brain
+S2code technology
+Applore Technologies
+Datopic Technologies
+PixelCrayons
+TechGropse Pvt. Ltd
+Kept Bug Technologies
+AppSquadz Software Pvt. Ltd
+Ouctus Technology
+Infoxen
+DreamSol TeleSolutions
+Ajath
+Shree Partners
+Dassault Systèmes
+Honeysha Technologies
+KlearNow India
+Cvent India
+iE3 Innovations
+Akasina Technology
+Influxive Technologies
+Qualcomm
+Persistent Systems
+Mycom
+Aristocrat Technologies
+Eptura
+Nextwork Technologies 
+Infogix International
+Thoughtfocus
+censhare
+Ocrolus East
+MongoDB Software
+SCA Technologies
+Empenofore Technologies
+Skilrock Technologies
+Leapwork
+Ramco Systems
+Axtria
+SSP 
+AiRo Digital Labs
+Appcods
+ELAARSON
+Winklix
+Simpplr Software
+T-Systems
+Srijan Technologies 
+Salesforce
+OnActuate
+Web Hut Technology
+Proso AI Technologies
+Custtard technologies
+FinBox
+Codersbay Technologies
+Dimension Data
+Microsoft
+Radiant Web Tech
+Sharkdom
+RDDTree technology
+IntellyLabs
+VertexOne
+Kondra
+Cyber Vision 
+TechWalking
+Techno Companion
+Amlgo Labs
+Aithent Technologies
+Lepton Software
+AiDash
+Maxicus
+Alchemy
+Quytech
+Vaco Binary
+HostBooks
+RSK Business
+Nagarro
+XeliumTech Solutions 
+Testatech Technologies
+EaseHawk
+Simpplr Software
+Arcesium
+EY
+Infogain
+Concentrix
+Snapdeal
+Insoftsys
+Zeabros
+Guavus Network Systems
+Smssofts Software 
+DynApt Solutions
+Key Management Group
+Eudemonic Technologies
+dunnhumby
+Monocept
+HeadSpire Technologies
+NMG Technologies
+Queppelin
+Parth Universal 
+EFKON India
+Stigasoft
+SAP Labs
+Coralogix
+Xoriant Solutions
+O4S
+BlueStacks
+ZeroBug
+AP Techpins
+MyGenie Technology
+Softbiz Solutions
+Viber
+GroundTruth
+SuperPen
+Qudify
+Zimyo
+Oasis TechnoSoft
+Nicole infosoft
+Squareboat
+Convexicon
+Akoode Technology
+IKOKAS
+Encriss
+Tranciscolabs
+C1 India
+WaterMarc
+Revivo Technologies
+Q3 Technologies 
+ThirdEye AI
+Legistify
+Sage Software Solutions
+Darwinbox
+Sirion
+Webority Technologies
+Perceptiviti
+Ezulix Software
+Believ-In Technologies
+Revinfotech
+ROSTAN Technologies
+ZIGRAM
+CoolBoots
+Xebia
+Mantra IT Systems
+mFilterIt
+Trion Technologies
+CompaniesNext Technologies
+AHOM Technologies
+Ranolia Ventures 
+SyanSoft Technologies
+SOTI Inc
+Group10 Technologies
+Solveda Software
+Intersoft Data Labs
+ConsoleBit Technologies
+OTS Solutions
+Websbaba Technologies 
+LogixGRID Technologies
+Essence Software
+Swaran Soft
+Oodles Technologies
+Imenso Software
+Quale Infotech
+OrangeMantra 
+Vatsin Technology 
+Wroffy Technologies
+Nitso Technologies 
+Antino
+Strawberry InfoTech 
+Troibits Infotech
+Amartam Technology
+GrowUni Technologies
+Affable Web Solutions
+Goolean Technologies
+Thinvent Technologies
+Corwhite Solutions
+Spyne
+Lynette Technologies
+Sprinklr
+Advantal Technologies
+Mobi India
+Intenim Technologies
+Xtreme Softech
+DayNight Technologies
+Virasat Solutions
+Qbit Labs
+Conam Technologies
+DDN Softech
+CT Software
+Virus Positive
+Mentobile Technologies
+Bhadani Technologies
+Geoshot Technologies
+Ushyaku Software 
+Enpass Technologies 
+Microware Computing
+Opacify
+Paavu Technologies
+Biocipher Technologies
+Exainfotech
+WCS
+Avaal Technologies
+DDSPLM 
+Amantya Technologies
+Innostax Software Labs
+Phoenix Tech
+ObjectiveHub Technologies
+Target Integration
+Invader Technologies
+PinnacleWorks Infotech
+GlobalNodes
+FieldAssist
+Intellinet Systems
+Goognu
+Radiansys Technologies
+ProntoSys Technologies
+Nuclay Solutions
+Online24x7
+InfoAce Technologies
+KareXpert Technologies
+Magento India
+Zerone Technologies
+Bellurbis Technologies
+QArt Solutions
+Netsmartz Infotech
+Wisethink
+Simpli5d Technologies
+RPA Infotech 
+Wheelseye Technology
+eFleet Systems
+Hitechmind Solutions
+Dreamers-Dream
+Birdeye
+Kaplan
+American Express
+Slice
+Agicent - bhavya.sharma@agicent.com
+Etelligens Technologies
+Emeis Technologies
+Konfinity
+Sopra Steria
+ probuddysoftware - hr@probuddysoftware.com
+Elevate
+ priyanshi.jain@bluetris.com
+Rapidsoft Technologies
+Info-X Software
+Targus Technologies
+Tech Blue Software
+Josh Technology
+EON Technologies
+Kellton Tech Solutions
+Knocial India
+Think Future Technologies
+Appcods
+A-1 Technology
+Z1 Tech
+WEBIENT TECHNOLOGIES
+Hashtrust Technologies
+Truminds Software
+Quytech
+Cisco System
+Summit Information Technologies
+Prologic
+Mediology Software
+Open Software Technology
+Webdos Technologies
+VLink India
+Incedo Inc
+Fulcrum Biometrics
+Infodart Technologies
+eXtendCode
+Digitem
+eCIFM Solutions
+Mobilmindz
+Copper Digital
+Wizertech Informatics
+Quayo Technologies
+Pyzen Technologies
+Smart Tech Infosystems
+Plusone Technologies
+Alchemy 
+Hartron Communications
+3InfoWeb
+Convosight
+NexGen Tech
+IStrat Software
+Intellect Commerce
+RoundCircle
+MTAP Technologies
+Cargo Flash Infotech
+Bennett Technologies
+Teleperformance
+Xoxoday
+Zippee
+Helios Tech Solutions
+Quantizer Research
+VISUALEZ TECHNOLOGIES
+Naehas
+YCSPL
+Brancosoft
+Global Groupware
+Gemini Solutions
+Aithent Technologies
+Wakencode Technologies
+Planet PCI Infotech
+StartxLabs Technologies
+Clavax Technologies
+RSB Systems
+Espire Infolabs
+Binary Semantics
+Digivive Services
+SingleInterface
+i2V Systems Pvt. Ltd
+Lirik
+Nokia
+AiSensy
+Qandle
+Paxcel Technologies
+City Innovates
+Byte Brackets
+Progression Infonet
+Metadome.ai
+Harshit.goyal@benthonlabs.com
+hiring@benthonlabs.com
+Daffodil Software
+Telecrm
+S&P Global
+Panasonic
+Fretron
+Primathon Technology
+Aaptatt
+WiJungle
+Estel Technologies
+Zimyo HR Software
+Kubetron Technologies
+VdoCipher Media
+Ething
+CreateBytes
+Petro IT
+Iksha Labs
+Nubiz Solutions
+Daalvin Service
+Nexinfosoft
+Shipway 
+GirnarSoft
+ThirdEye AI
+Abhastra Technology
+OneShield India
+pOrbis
+ShepHertz
+Techvins
+CodeChavo
+Nutritap Technologies
+ValueCoders
+Stigasoft 
+Atos Syntel
+ZS Associates
+Wizikey
+Cashify
+Zekardo Technologies 
+Neetable
+Grappus
+PCL Technology
+Keyideas Infotech
+V3M Technologies
+RAJMITH 
+Yugasa Software Labs
+Inwoin Technologies
+FiftyFive Technologies
+Proswl Technology
+Pioneer E Solutions
+archita.srivastava@thrivingsprings.com
+AbhiBus
+Techpertz IT Solutions
+Shiryu Software
+Damco Solutions
+NetMaxims Technologies
+Inforises Technologies
+Infocoin
+CCCInfotech
+EX Squared Solutions
+Techsteck Solutions
+Softsynth Software
+RARR Technologies
+Connect Infosoft Technologies
+Bitstreaks Technologies
+Dean Infotech
+CSS Player IT Solutions 
+Tech9logy Creators
+AiqZon Technologies
+Webliska Technologies
+Dixinfotech
+JVC Solutions
+Beryl Systems
+CodeNap
+WitQualis Technologies
+360 Degree Cloud Technologies
+Venture7 Technology
+Maisha Infotech
+Webhelpy Technologies
+Mtas Technologies
+Yatharthriti IT Services
+Metacube Software
+Techno Softwares
+Pratham Software
+Phoenix Advanced Softwares
+Ranosys
+Alphonic Network Solutions
+AnkTech Softwares
+a3Logics
+SOFTSERV SOLUTIONS
+Compucom Software
+Santech Technosoft
+Dataoxy Technologies
+Charu Mindworks
+Infoshore Software
+Alpha Technosys
+Planet Web Solutions
+Nlineaxis IT Solutions
+Groot software
+Colonel Software
+IndiaResults.com
+REGEX SOFTWARE
+Yusata Infotech
+Premad Software Solutions
+Conio IT Solutions
+Arrify
+Zonet Technology
+Fzeetechz
+Cyntexa
+Appirio
+Tweaking Technologies
+AppITron Solutions
+Programmates
+Aamod ItSolutions
+Systweak Software
+C G Technosoft
+Priyam Infosystems
+Rams Creative Technologies
+Jalan Technologies
+Future Profilez
+AleaIT Solutions
+Codezion Softwares 
+Dev Technosys
+Kadam Technologies
+BitAce Technologies
+iSkylar Technologies
+Octal IT Solution
+Froiden Technologies
+OweBest
+Pairroxz Technologies
+Bluetris Technologies
+Mobzway Technologies
+Ways & Means Technology 
+Extern Labs
+Ascure Technologies
+HireTale
+Codexo Software
+DeepOrion Technology
+Gayatri Software Services
+BVM Web Solutions 
+Gempulse Infotech
+Requin solutions
+Hornet Dynamics
+appentus
+Fullestop
+PAR Technology
+QDegrees
+StarPro Labs
+W3care Technologies
+Prerna Trimurty Infotech
+MeanSol Technologies
+Strivemindz
+Semiosis Software
+Wisflux Tech Labs
+Blue Space
+Techtwins Technologies
+Kotibox Global Technologies
+Astegic Infosoft
+Logictrix Technologies
+Appronic Software
+Aptclouds Software Solutions
+IBV Technologies
+Innovana Thinklabs
+Dotsquares Technologies
+Appbay technologies
+Appco Software
+Xebia
+Ezulix Software
+ARKA Softwares
+Acolyte Technologies
+GENX SOFT TECHNOLOGIES
+VolanSoft Technologies
+Startbit IT Solutions
+Protocloud Technologies
+Appic Softwares
+Cynosure Technologies
+EUONUS IT
+Cyrus Technoedge
+VKREATE
+Cubeheap Technologies
+Gosofttech Solutions
+WITH U Technology
+Trackonweb IT Solutions
+Brixcode Technologies
+MetaFox Technologies
+Ollosoft Technologies
+Techno Derivation
+Compusys e Solutions
+Rootsquare
+EZYTM TECHNOLOGIES
+Vidhema Technologies
+Arthonsys Technologies
+Ambient Infotech
+Parken Solution
+HabileLabs
+Infomagine Softwares 
+Pixel Point Technology
+Athenalogics Solution
+Decipher Zone
+Timelabs
+Codebird Technologies
+Ownrox Technologies
+Kugelblitz
+GalaxyWing IT Solutions
+Codebuiltup IT
+Amplework Software
+Codespur Technologies
+The NineHertz
+Datacube Softech
+Shri Genesis Software Solutions
+Prilient Information Technologies
+Login2Design Technologies
+Hugh Technolabs
+Comfygen Technologies
+Appohm Technologies
+Pincode
+Lifesum
+Solutohub Technologies
+iSpace Software Solutions India Pvt Ltd
+iConcept Software Services Pvt. Ltd
+NIT DATA
+DigitalTrust Technologies
+Pramati Software
+Edvenswa Tech
+Quadrant Technologies
+OTSI
+DXC Technology
+Archents IT India
+Hexagon Capability Center India Private Limited
+BizAcuity Solutions
+SAILOTECH 
+Raice Tech Soft
+Analogue IT Solutions 
+OM IT-Solutions
+Techbion Software Systems
+Iconwave Technologies
+Japp Tech
+Timing Technologies
+celzene IT services
+Arohak Technologies
+Centroid IT Systems
+Aptsol Global Tech
+Pi Square Technologies
+Temenos India
+Savantis Solutions India
+Incube
+Zessta Software Services
+SumTotal Systems
+Cloud Odyssey IT Solutions
+CognitivZen Technologies
+Microden
+Tetrasoft India
+TetriQ Solutions
+Lera Technologies
+Imagination Technologies
+IntouchCX 
+Techmojo Solutions
+CDK Global
+MedPlus Software
+Pennant Technologies
+Taashee Linux Services
+Canopy One IT Solutions
+Techwave Infotech
+Othain Software Services
+Teksystems Global Services
+Velocious Solutions
+Aaseya IT Services
+Cogent Data Solutions
+Sparity
+Gleecus TechLabs
+YSK INFO TECH
+ideyaLabs
+IT Logix India 
+Visvi Info
+Vuesol Software Solutions
+EverestDX India
+Kivyo Soft
+Thryve Digital
+Xoriant Solutions
+AmpleLogic
+Global Technology Services
+PRAVAS IT SOLUTIONS 
+SOWEDANE IT SOLUTIONS
+Cognisive
+RapinnoTech Solutions
+ZenQ
+Bodhtree
+SumPositive Services
+ANALYTIC VISION 
+Carbynetech India 
+AutoRABIT Software
+Rational Technologies
+ValueLabs
+Tvarana Software Solutions
+TCPWave
+Enormous IT Services
+Candid Brains
+Great Data Solutions
+Vaco
+ParamInfo IT Solutions
+CastusInfo Solutions
+Soft Sol
+ACI Infotech
+Colruyt Group
+One97 Communications Limited
+Collegeduniya
+Accelya
+Solutohub Technologies
+Raice Tech Soft
+Timing Technologies
+Pegasystems
+Analogue IT
+BizAcuity Solutions 
+IntouchCX
+CognitivZen Technologies
+Techmojo Solutions
+Great Data Solutions
+Microden
+Savantis Solutions
+Snovasys Software Solutions
+Gleecus TechLabs
+Cognisive
+Lyros Technologies 
+Pennant Technologies
+Visvi Info
+Preeminent Technology
+Veritis Solutions
+Artech Info Systems
+Machint Solutions
+Canopy One IT Solutions
+RM1Coders hub software solutions
+SumPositive Services
+Techweblabs
+ValueLabs
+Foray Software
+IT Logix India
+NADELLA INFO TECHNOLOGIES
+Time Champ
+Intellativ India
+AutoRABIT Software
+SOWEDANE IT SOLUTIONS
+Wilco Source
+Kinich IT Labs
+Enormous IT Services
+CastusInfo Solutions
+Ivy Comptech
+Smart IMS India
+Bodhtree
+SysIntelli Software And Services
+TCPWave
+Prasthana Software Solutions
+ParamInfo IT Solutions
+SmartDocs
+ACI Infotech
+Vertex Computer Systems
+ANALYTIC VISION
+Candid Brains
+Vaco
+ITP Software India
+OSI Systems
+Techally Labs
+Rational Technologies
+Unisys
+VixSpace
+BSIT Software Services
+W3SOFTECH INDIA
+Odcet Technologies
+Vestrics Solutions 
+Youngsoft India
+Hitachi Vantara Software 
+Wancura software solutions
+WILLSFLY TECHNOLOGIES
+Symphony Software
+JUNAATI TECHNOLOGIES
+Syoft
+EVONTEX IT SOLUTIONS
+ABSYZ Software 
+Parangat Technology
+Epam
+Arawinz Soft Solutions
+iPrism Technologies 
+Code Connex
+NAT IT SERVICES
+InfoMatrix Digital Solutions
+SP Software
+Allvy Software Solutions
+EffiaSoft
+Datacipher Solutions
+SmartInternz
+Intone Networks India
+Kastech Software Solutions
+Swipe
+Beetsl Soft Solutions
+Hyposoft Global Solutions
+DZYN
+Walsharp Technologies
+ADTECH Corp. Technologies
+CloudTern Solutions
+Origin Softwares
+Scadea Software Solutions 
+Pragmatic Play
+Deeploop Technologies
+Devbox Software
+Xyenta Solutions
+JanakiBharath Software Solutions
+Hinduja Global Solutions
+NebuLogic Technologies
+Zesro Technologies
+Kapil Technologies
+Aveva
+Acuity Software Technologies
+Pronix IT Solutions
+CultNerds
+Perceptive Analytics
+Aumnics IT Solutions
+Agility
+Innominds Software
+Perigord Premedia (India)
+Nexivo Consulting
+Dotcom Weavers Solutions
+QualiTlabs
+Ebix Software India
+BPK Tech Services
+Cloud First Computing
+Kanerika Software
+Innovatech Technology Solutions
+Dataflix Technologies
+Chakravuyha Software Technologies
+RCE IT Solutions
+DreamVu India
+Manteio IT Solutions
+Innomax IT Solutions
+Topnottch Softtsol
+Growth Hack Solutions
+Kaara Info Systems
+Deepen AI India
+Dextara Datamatics
+CompuGain Solutions
+Autorox
+FastPix
+ENIQUE Solutions
+Anilee Software Solutions
+Kreaas Technology Solutions
+Triviti Tech
+Divami Design Labs
+APPIT Software Solutions
+Crusoe Technologies
+Ihack technology
+DataFactZ
+Techmologics Innovations
+Elancer IT Solutions
+Astrolite Tech Solutions
+Drucare
+AlliancePro IT
+Innova Solutions
+Factset
+Fluentgrid Limited
+DLF
+Zensar Technologies
+NCPL
+Intelex Systems
+Quanteon solutions
+OroGlee Solutions
+Zenardy Technologies
+Broadcom
+Byteridge Software
+Kapil IT Solutions
+GAP IT Services
+Eficens Software Services
+Thoughtworks Technologies
+ValueMomentum Software Services
+Gramener
+Movate
+Adp
+Netenrich Technologies
+Quixy
+M3BI India
+XTGlobal
+Turvo India
+Honeywell Technology Solutions
+Wenable Technologies
+Jade Global Software
+Thrymr Software
+Ojas Innovative Technologies
+Evergent Technologies
+Forsys Software
+CompuGain Solutions
+Rite Software Solutions
+Single Point Solutions
+ETG Digital
+Apple
+Blumetra
+Mirabel Technologies India
+CES
+QualMinds Technologies
+Demenew Tech
+Freshworks
+Futluz Technologies
+Value Creed
+RJ Global Solutions
+REDMINDS TECHNOLOGIES
+Egen
+NetBrain Technologies
+AtAI Labs
+DBS Technology
+Exaze
+Monocept
+Abjayon
+Win Information Technology
+Euclid Innovations
+EasyCHIT
+AheadRace
+Leoforce
+Zestwings Informatics 
+FitGymSoftware
+DevPixel
+Growric
+Fluid Touch
+Cognida.ai
+PamTen
+OnePlus R&D India
+Toyaja Software
+CloudLeap Software
+Vervon Technologies
+Maang Technologies
+Data Glove
+CapEngage Technology
+FiNSTA
+Ultrakey IT Solutions 
+TekWissen Software
+Gaian Solutions
+Walsharp Technologies
+Shanrohi Technologies
+KodeBloom Technology
+Ideabytes Software
+Eze Software
+PrimeSoft Solutions
+Allvy Software Solutions
+SS&C Technologies
+Elancer IT Solutions
+WhiteCoats
+EvGateway India
+Covalense Technologies
+GenySoft 
+Altair
+Askmeguru Technologies
+Landmark IT Solutions
+Brainovision Solutions
+Conquerors Software Technologies
+Pronteff IT Solutions
+O2F Info Solutions
+Danyon IT Technology
+C2N IT SERVICES
+Iblesoft
+ZAZZ IT SOLUTIONS
+Megasoft Limited
+EUREKA IT SOLUTIONS
+JNET Technologies
+iNative Tech Solutions
+Metanoia Software Solutions
+ExperienceFlow Software
+Caprus IT
+Bourntec Solutions
+Fission Infotech
+Mindtree
+MWebWare Software Services
+Acronmind Innovative
+HighRadius Technology
+IBaseIT
+Techally Labs
+Selectsys India
+Verizon India
+Mirafra Software Technologies
+Adaps IT
+Encora Software
+Inkprog Technologies
+Unique IT Solutions
+PennyWise Solutions
+SutiSoft
+ENut Technologies
+S.M. Intellisoft Technologies
+Techmojo Solutions
+Lantronix India
+MSRcosmos
+Vitech Systems
+Voltuswave Technologies
+Athena Global Technologies
+TekBon Software Solutions
+EHNOTE India
+TestingXperts
+Ipark info technologies
+Quad One Technologies
+BeetleRim Technologies
+Nexgile Technologies
+ITRadiant Solutions
+Spatial Techno Solutions
+Volio Technologies
+Softility
+Nalsoft (P) LTD
+UnyKloud Technologies
+CriticalRiver Technologies
+Delta Technology
+SCRIPTBEES IT
+CrewByte Solutions
+Motto Systems
+DieboldNixdorf India
+mroads
+Saxon AI
+AppShark Software
+J V P Soft
+Cigniti Technologies
+EEP Technologies
+MOURI Tech
+Ray Business Technologies
+Suchir Softech
+Solunus Technologies
+Future Nine Information Technologies
+Acuvate Software
+Tvisha Technologies
+Cashapona Technologies
+ToggleNow Software Solutions
+Varnisoft Technologies
+Tidal Digital Technologies
+Achala IT Solutions
+Sadup Softech
+Yext
+RightWorkz Technology
+Shore Infotech
+Kazma Technology
+Acutesoft Solutions
+Spark Infosys
+Prapad Technologies
+ESmob Technologies
+Minfy Technologies
+Option Matrix InfoTech
+WebChampions
+Vein Software Solutions
+Reassure Solutions
+Ivy Comptech
+Grepthor Software Solutions
+Endeavour Technologies
+Skywaves Software
+Skyrunway softtech
+Mohjay Infotech
+Aptapace Innovative Technologies
+BeyondScale
+Webstok Innovations
+Versatile IT Solutions
+Phenom People
+Headway data systems
+Beehyv Software Solutions
+Pragmatiq Systems
+Hackett Group
+Indixpert
+Backflipt Software
+SmartWinnr
+NAVIONICS TECHNOLOGIES
+TRAY
+Metalok Solutions
+Janaspandana Software Solutions
+Neev Systems
+DiggiGrowth Technology Solutions
+Teletext India
+Adaequare Info
+AWG IT Solutions
+Edgeforce Solutions
+MaaxtreeM
+SPIL Technologies
+Kensium Solutions
+Repsoft
+ParadigmIT Technology
+Vidhema Technologies
+Synactive India
+SurveyHeart
+DiLytics
+CAMP Systems
+Sreeb Technologies
+Suraaga Technologies
+Techadlien
+BizGaze 
+Reputation.com India
+TechSophy
+Thespan Technologies
+Aspyrdata Solutions
+Project Corp Software Technologies
+BESTSCREEN TECHNOLOGY
+Next Drive Technologies
+FastCollab
+CloudJune Technologies
+Contigo Techsolutions
+Greenbuds Technology
+Numeric Technologies
+AutoBG LLP
+Locus
+Krenai
+Think Exam - A Ginger Webs Company
+Nasdaq 
+LSEG
+Nickelfox Technologies
+Demandbase
+Livspace
+Infor
+Davis Software Solutions
+TEKTREE SOFTWARE
+Enterpi Software Solutions
+CPI Data Services
+Datagaps India
+ITvista Software 
+Adithya Infinity
+ZINN Software
+NeelBlue Technologies
+GenQtech Solutions
+Zemoso Technologies
+TechstarGroup
+Kore.ai Software
+Anblicks Inc
+Antra Info Solutions
+Cognitonic Systems
+SanHar ABS India
+Coupa software India 
+Amber
+RESKOM Technology
+Forrce Infotech Solutions
+Crypsis Technologies
+SMARTnCODE Technologies
+Regalix India
+Eidiko Systems
+DWP Globa
+Infrability IT Solutions 
+Aspire Systems India
+Zambient Info Systems
+ShadowEdge Technologies
+Epethilial Tech Services
+Pixelvide
+P99Soft Pvt Ltd
+ReleaseOwl 
+Planon Software Services
+Suneratech
+METAFOLKS TECHNOLOGIES 
+Areteans
+Motivity Labs
+CEIPAL Software
+Shelloris Online Services
+Apexon
+Spotverge
+Amerisource Solutions
+Yagna Technologies
+Aurum Data Solutions
+Karanyasa IT Solutions
+Garmin Technologies
+Amnet Digital
+Newday India
+Cotelligent India
+TurboHire
+MoPac Technologies
+GHL Software Services
+Mansha Software
+Mindspace
+Concentrix
+GGK Technologies
+Mantha Tech Solutions
+Zognu Technologies
+Avtrix Software Solutions
+Areksoft Technologies
+Echor Tech
+ProKarma Softech
+Sonata Software
+Olga Technologies
+Futran Tech Solutions 
+Vengai Software Solutions
+First Source IT 
+Infochord Technologies
+SmartSoft India
+MicroSpark Software
+NaarSoft Tech Services
+Pranathi Software Services
+Magneq Software
+Melvault Software Solutions
+Triniti Advanced Software Labs
+AppMajix Technologies
+Girus technologies
+Astoria Technologies
+HTC Global Services
+Lince soft Solutions
+Spidy IT Solutions
+Experis IT
+X-YUG TECHNOLOGIES
+Solugenix
+Ronas Soft Solutions
+Bradsol
+CloudAce Technologies
+Skróts
+Million IT Square
+ReferenceGlobe Technologies
+KSR Infotech
+onelab ventures
+Mindstix Software Labs
+Atomic Loops
+Massive Mobility
+Practice by Numbers
+Pratiti Technologies
+Celigo
+Kreeda Labs
+Finmo
+Qloron Pvt Ltd
+apty.io
+icanheal
+ProdGain
+Indus Valley Partners
+Galytix
+Asymmetri
+BUSINESSNEXT
+Nutritap
+Findocs
+kredx
+misogiAI
+gspann
+Raja Software Labs
+SmartDocs
+LoginRadius
+StatusNeo
+Dista
+Intellinez Systems
+OSI Systems
+Ridhan Technologies
+NowFloats Technologies
+CGLIA SOLUTIONS
+USM Business Systems
+Achala IT Solutions
+Techno Brain India
+Panzer Technologies 
+Smartnet IT Solutions
+Codon Software
+Gaido Technologies
+Accellor Software
+Bijib Soft Private 
+Incresol Software Services
+Kireeti Soft Technologies
+Inteq Software
+Fission Labs
+Kyuubi Software Services
+Brihaspathi Technologies
+Tera Software
+Asetons It services
+Sagarsoft
+D. E. Shaw India
+NIVASS IT SOLUTIONS
+Navayuga Infotech
+CYE TECHNOLOGY
+KTree Computer Solutions
+Predera Technologies
+Quality Matrix
+Hyena Information Technologies
+Foxfire Technologies
+Vedantha Software Solutions 
+4G Identity Solutions
+Oorwin Labs 
+DevRabbit
+SureIT Solutions
+Risposta Software
+Cortracker It
+DataAngle Technologies
+Anarghya Communications
+Intellixaa IT Solutions
+Dot eVentures
+Million Minds Infotech
+Avalon Software Services
+Sparsh Communications
+Bento Labs
+Raytex IT Services
+CheckMark India
+Prime Source
+Envision Enterprise Solutions
+Tech Arion
+SmatBot
+Blackbuck Engineers
+Soul Of Pluto Tech
+BITOKEN IT Solutions
+Truedge Software Solutions
+Accelerize360
+LegalCraft Solutions
+ZenQ
+Attivo Technology
+Tecversa IT Solutions
+Inforaise Technologies
+ZenThrive Technologies
+Ansys
+Infrrd
+ Istronix Solution
+Excellent Webworld
+Citi
+To the new
+Xit Solutions
+PACT Software Services
+Accellor Software
+iLenSys Technologies
+bTranz Software Solutions
+Deloitte
+Accenture
+TCS
+Capgemini
+Novartis
+Amazon
+Microsoft
+HCL Technologies
+Xilinx
+WellsFargo
+ Headstrong
+Google
+Oracle
+Citrix Systems
+Bank of America
+Thomson Reuters
+CommVault
+ CA Technologies
+MAQ Softwarer
+Cognizant
+Servicenow
+ValueLabs
+Cisco
+Synopsys
+Done by none
+mathworks
+robert bosch
+Ness Digital Engineering
+HP
+Phenom
+ITC Infotech
+Altimetrik
+Indeed
+Adobe
+Gainsight
+Apexon
+Chegg
+verisk
+brillio
+SAIC
+Commvault
+Tide
+Genesys
+Zoho
+Zemoso
+Marvell Technology
+Teamware Solutions
+Critical River
+Tavant
+Reputation
+BMC Software
+eNCORA
+Indium Software
+NeoDocto
+VMware
+Linkedln
+Autodesk
+Apps Associates
+Apisero
+Bhoomicam
+Ameyo
+Upgrad
+Razorthink
+OneXtel
+UKG
+Diginique TechLabs 
+Ciena
+Kapture CX
+opkey
+ongrid
+Adobe 
+Branch International
+Coindcx
+CogniTensor
+Makunai Global Technologies
+Makunai Global Technologies**
+iEnergizer - email 
+ImpactCraft
+Honeywell 
+EPAM Sstems 
+Pocketful
+VISUALEZ
+Orbit Wallet
+Valiance Solutions
+Huemn
+Akash Institute
+Conversive SMS Magic
+Tennr
+Practice by Numbers
+Taskus *
+Makemytrip*
+Synopsys
+Chegg
+Fourbrick Technology
+Iris Software 
+Cadence Design Systems 
+Done by None
+Thomas Reuters
+Snal Deal
+ITC Infotech 
+Orange Bussiness
+Chetu
+BA Continuum India 
+Airbnb , 
+Compunnel, 
+Siemens
+Robert Bosch
+Team Computers 
+Tokopedia 
+PTC 
+Virtual Employee
+HCL
+MagicBricks 
+Webkul
+Birdeye
+SirionLabs
+NeoDocto
+CarDekho
+NLB Services 
+Amadeus 
+ANR Software 
+Intuit
+Agoda 
+Rategain
+Apisero
+Arm
+Neosoft
+Criteo
+Celebal Technologies 
+Booking.com
+Gemalto
+Autodesk
+Intellect Design Arena 
+Lambda Test
+Mobiloitte
+InnovationM
+Tide
+Successive Digital
+Red Hat
+Nutanix
+Polestar Solutions 
+Fluper
+Progressive Infotech
+Gojek
+Cloud Analogy 
+CashKaro.com
+Altimetrik
+Shipsy
+Moretasks
+Dynatrace
+Apolis
+Teamware Solutions
+TAAZAA
+IT BY Design
+Brillio
+inMorphis
+Bigstep
+QBurst
+Thinksys
+Watchguard Technologies 
+MyOperator 
+Everise
+Compro Technologies 
+Grapecity
+ProProfs
+Helm360
+Netomi
+Irdeto
+Graygraph Technologies 
+Jellyfish Technologies 
+Posist Technologies 
+Seninel One
+Roundglass
+Velocity Software Solutions 
+Chargebee
+Lumiq
+HashStudioz
+Oneshield
+Marvell Technology
+Saviance Technologies 
+1E
+Opstree Solutions
+makepositive
+Databricks
+Aforeserve.com
+Altair 
+Hestabit Technologies 
+Monocept 
+Lucid 
+HIC IT Solution and Services 
+ONCI
+LogicPlanet
+inFreedo
+NIC
+Innohub Technologies 
+Robosoft Technologies 
+Cloudera 
+Awign Enterprises
+Quarks Technosoft 
+Appy pie
+Netsmartz
+Demandbase
+Innefu Labs 
+Coditas 
+Thoughts2Binary
+Fleetx
+Accedo Broadband
+3CLoic 
+Attentive AI
+Oncehub
+Phenom
+Cimpress
+Advantageclub.ai
+F13 Tech
+Techjockey
+Encora
+Datadog
+IT Convergence
+Qlik
+One.com
+Classic Informatics 
+Argusoft
+Ezeiatech
+Altezzasys
+Sysmind
+E2logy Software Solutions
+Redbus India
+ZeMoSo
+Highlevel
+Genral Dynamics IT
+Totality Corp
+OTS Solutions
+TopHire
+Contify
+Plasma
+Procol
+Simform
+Recro
+Gingerwebs 
+Trangile Services 
+Bayone Solutions 
+Rapido
+NextGen Tech Solutions 
+Lepton Software
+Jsimple
+Resideo
+Astrea IT Services
+Saraca Solutions
+Analysts
+Hackerrank
+Optimal Virtual Employee
+Solveda
+Orane Consulting
+Grappus
+Asana
+Webtel Electrosoft 
+Sonicwall
+HClactive
+6sense
+SmartSchool Education
+Amiga Informatics
+WeddingWire
+FiftyFive Technologgies 
+Pramati Technologies 
+AAPNA Infotheek
+AppSierra Solutions
+Rang Technologies 
+Verint
+Nitor Infotech 
+Alcor Solutions 
+Akshaya 
+Apps Associates 
+Sterco Digitex
+Rooter
+Dimagi
+Calsoft
+CMS Info System
+Smart Working
+BlaBla Car
+Truechip Solutions 
+InKnowTech
+ASDF Web Hosting
+Staqu Technologies
+Dazeworks
+Optimum Solutions
+Fireeye
+Indium Software
+Leegality
+Zopsmart
+Neuraflash
+Samsara
+Ripenapps Technologies
+Momagic Technologies 
+ Sprinto
+Dynamics square
+Excelgens
+Zeetech Manageemt & Marketing
+iBoss Tech Solutions
+AVL India Software
+Nineleaps Technology Solutions
+Nethues Technologies
+Virus Positive Technologoies
+Peel works
+e-Zest Solutions
+Zimyo
+Veretex Global Services
+Rezo.ai
+TechGenies
+Logitech
+Vatsal Technosoft
+Conga
+Indecomm Global Services
+Pomeroy Technologies
+HROne
+Primathon
+Dynpro
+Nayan
+Crownstack
+Epicor Software
+KPLTech Solution
+Netskope
+Insider
+R4 Solutions
+Haptik
+Plaxonic Technologies 
+Magic Finserv
+Amity Software Systems
+Provar
+Cialfo
+BangMetric Services
+Motive
+_VOIS
+Saxon Global
+Tencent
+Quokka Labs
+Highlands
+Ocube Services
+Intec Infra-technologies
+Entrata India
+Prangat Technologies
+Grazitti Interactive
+Paramount Software Solutions
+Airmeet
+RSG Media Systems 
+Speridian Technologies
+TechMatrix Consulting
+Gainsight
+Onething
+Webmoril Technologies
+Codestore
+Ogrelogic
+rtCamp
+Msys Technologies
+Xilinx
+Tricon Infotech
+Wobot
+TechChefz Digital
+Innover Digital 
+ESRI India
+Agiliad Technologies
+C1 India
+Equipped AI
+Clovity
+Lumen Solutions
+ECommerce
+RV Solutions
+Qwerty Concepts
+HelioNext
+Infinity Soft Systems
+Incrementors Web Solutions
+ISKPRO
+Opensense Labs
+TIS
+Ginesys
+Insthyre
+Studio Graphene
+Benepik
+Axtrum Solutions
+ongrid
+Metadome.ai
+The trade desk
+mawai infotech
+Experion Technologies
+Awiros
+Javi Systems 
+Foodpanda India
+Unyscape Infocom 
+Deltek
+Claritus Management Consulting
+Lirik
+Neuronimbus
+Simeio
+QAD 
+Mirafra Technologies
+Hungama 
+Headout
+SISA Information Security
+Hackerone
+Doodleblue Innovations
+Egnyte
+Intellicus Tchnologies
+Bizom 
+Spectramedix
+Icon Resources
+Kaseya
+Yugasa Software Labs
+Infoblox
+Inputzero
+Certa
+Markup Designs
+i2k2 Networks
+Numerator
+Xotiv Technologies
+Gofrugal Technologies
+Seclore
+Coviam
+Zucol Group
+Pinterest
+Bellurbis Technologies
+Anunta Technology
+SHEROES
+Full Creative
+Busy Infotech
+Ark Solutions
+Innotical Solutions 
+Coverfox
+Reputation
+Business Standard Limited
+Dianapps
+Talent500
+Testerwork
+Xeno
+Celestial Systems
+Intuitive Technology 
+ZenQ
+Cloud Certitude
+CWS Technology
+BreachLock
+4th Quarter Technologies 
+Intone networks 
+BrickRed Systems
+Royal Cyber Inc
+Hiver
+Omnicard
+Rosmerta Technologies
+Khoj Information Technology
+uTest
+InfoBeans
+Trident Techlabs
+VAYUZ Technologies
+Walking Tree
+GoComet
+Apptad
+Scry AI 
+Tenerity India
+Webnyxa Technologies
+Prospus
+Inpetro Technologies
+iTech US
+Geekyants Software
+CI&T
+Bacancy
+Veebrij
+QuillAudits
+Ivalueplus Services
+Astek
+Aeologic Technologies
+Shubh Solutions
+Yashi Consulting Services
+Nsight Inc
+Acro Technologies
+Celsior Technologies
+ARK InffoSolutions
+Lepide
+Bloomreach
+Xebo.ai
+Metacube Software
+Spirehub Softwares
+Aurigo Software Technologies
+Applications Software Technology
+SAP Concur
+Zup Innovation
+RD Solutions
+Fictive Box Media
+GLOBO 
+Moolys Software Testing
+MakkPress
+Smallcase
+Redis
+Servetel
+Minddops
+JustAnswer
+Vega Moon Technologies
+BrainMobi
+Neustar
+Meta IT
+Livesalesman
+Datability
+VDart
+WiJungle
+Ascendeum
+Ethane Web Technolohies
+RISHI
+Softline
+Ketto
+Payoda
+Meraki
+Axis Communications
+SPS Commerce
+Arabesque
+CitiXsys
+Nextiva
+TartanHQ
+IDS Logic
+Preply 
+Omnist Techhub Solutions
+Mesh
+Neotas
+Squareops Technologies
+Harjai Computers
+ScaleupAlly
+Praksh Software Solutions
+Maxicus
+Finesoft Technologies
+Minosha
+Almonds Ai
+Data Glove
+Arteria Technologies
+ATCS
+Poshmark
+Knorish
+Redian Software
+Mobiquity
+Shipway.in
+RS Software
+Hyper Verge
+eiCORE Technologies
+Flix
+Recruit Holdings
+Teamleader
+Viewlift
+Netmagic Solutions
+Apporio Infolabs
+Benthon Labs
+vTech Solution
+Batch Service
+Abhay Techno Services
+DreamOrbit Softech
+Dream Steps
+Hudl
+Buzzclan
+Altametrics
+Argil DX
+Yocket
+SDET Tech
+Truecaller
+United Software Group
+GammaStack
+Rocket Internet
+Ascendion
+Invia
+Velotio
+Idea Usher
+Appzlogic Mobility Solutions
+ISHIR
+Mind IT Systems
+Ripik Ai 
+Singlestore
+Pointclickcare
+TTT
+Toddle
+Buyhatke
+Trackier
+Innominds Software
+Aelum Consulting
+Uzio
+Ontic
+Spotify
+Terasol Technologies
+Crowdstrike
+Teknowledge
+Criticalriver
+Mobilecoderz
+City Innovates
+Neerinfo Solutions
+Airbase
+EMIS Group
+Codeclouds
+Premier IT Solutions
+Edcast
+Thoughtsol
+Jain Software
+Dentsu
+Ambition box
+Excell
+Cinntra
+Pactera
+Clickup
+Stepping cloud
+Synchronoss
+Intermedia
+Astroyogi
+Innoapps
+TechGropse
+Zenefits
+Williams Commerce
+ISH Techologia
+Simpleplan media
+Expedien
+Gramener
+Sailpoint Technologies
+Alan 
+Speechify
+Get my parking
+Abzooba
+Canva
+Auxesis Infotech
+Seasia Infotech
+Gogroup
+Miratech
+Imperva
+Draftkings
+Metricstream
+MWIDM
+Deligence Technologies
+Targus Technologies
+Infoicon Technologies
+SMART Technologies
+BPO Systems
+Mutual Mobile
+corsearch
+vDoIT
+Cloudcentric Infotech
+Aviso
+Programmers.io
+Incubit
+Enterprise Monkey
+Amnex Technologies
+22nd Century Technologies 
+Seven Star Websolutions
+CV Infotech 
+Flobiz
+Zenatix
+Cogito
+M3bi
+Sonet Microsystems
+Corevalue Technologies
+Infocus Technologies
+Elite Mindz
+Concirrus
+Infracloud Technologies
+Astir IT Solutions
+Roposo
+Wizni
+Mobcoder
+Verificient Technologies
+HummingWave Technologies
+Eateam
+QED42
+Testingxperts
+Infoxen
+NewtGlobal
+Syniti
+Radiansys
+Gelato
+Mamsys
+AtDrive Group
+Wigzo Technologies
+Bug Hunters
+Plunes
+Maxgen Technologies
+Descartes System
+webdew
+Arisen Technologies
+Senra
+Tringapps
+Winklix Internet
+Bluerose Technologies
+Hansen Technologies
+Clearsale
+Appsflyer
+Nvizion Solutions
+WovVTech
+Alma Connect
+Aera Technology
+Kissflow
+Empathy Technologies
+Alpha net
+Netenrich
+eSecForte Technologies
+Sankey Solutions
+ASAAS
+Proval Technologies
+Tufin
+EPHICACY
+eMudhra
+Brim labs
+Manras
+Valenta
+Techgig
+Vantage Circle
+Serigor
+Xcelore
+Comvision
+NuvoRetail
+Yashco Systems
+Prezent
+GFT Technologies
+Evolphin Software
+Canvas Infotech
+Agilite
+Aryson Technologies
+Micro1
+Kaspersky
+EVRY India
+StarXLabs
+Dialpad
+KGE Technologies
+Alivenet Solutions
+Solulever
+Brain Technosys
+Traction on demand
+Adreno Technologies
+Mitgo
+RTB House
+Dropbox
+ZAPR Media Labs
+Moon Active
+Ezappsolution
+Rhysley
+Tech superior Consulting
+BukuWarung
+Liberin Technologies
+Zenex Partners
+Brandburp Digital
+Fyle
+CloudThat
+Aptos
+Fynd
+Aptask
+Equal Experts
+JFrog
+Miles IT
+Hired
+Cognyte
+Indusface
+Goals101
+ChangeCX
+Sampark Softwares
+Infoglen
+EDB
+i2v systems
+Seven Lakes Technologies
+imocha
+Appitsimple
+Designoweb Technologies
+Roadcast
+Mondee
+Quadrafort Technologies
+OnActuate
+The Brand Bee
+Checkmate
+Rysun Labs
+Adform
+Insider
+Paxcel Technologies
+Grphers Lab Technologies
+Agiloft
+INSIDEA
+PinnacleWorks
+Scanova
+Farzi Engineer
+Melonleaf
+Fresherlive
+BPK Technology
+Squad
+Arminus Software
+Growtomation Marketing Solutions
+Responsive
+Speqto Technologies
+Pratham Software
+Prutech Solutions
+Zenarate
+Hypersonix
+BCN Group
+Webuters Technologies
+SA Technologies
+Unicode Systems
+Awesome Motive
+Empenofore Technologies
+Mads Technologies
+Whizcloud
+Axiom Global Technologies
+Trignodev Software
+Synergistiv IT
+Devrev
+Consilium Software
+CloudBoson Technologies
+Tecorb Technologies
+TechnoGen
+Remaxys
+Deftsoft Informatics
+Vir Softech
+Enpass
+Data Annotation
+Lumistry
+Eventila
+Sriggle
+AKS Websoft
+Invideo
+Trancis
+ALT Digital Technologies
+KPN 
+QCI
+Ramanan
+Axestrack Software Solutions
+Rapyder
+Stratacent
+TVS Next
+Atlys
+Inzint
+Scalacode
+Jaarvis
+Pricelabs
+Crewscale
+ASG Technologies
+Karza Technologies
+Fluentgrid
+KRG Technologies
+Namekart
+AHOM Technologies
+iByte Infomatics
+Kognitiv Inc
+SechNinjaz
+
+Aieze
+Zeotap
+Talkcharge
+SiDi
+Intellinet Systems
+ReliaQuest
+Aruba Networks
+BeatRoute
+Relinns Technologies
+Web Infomatrix
+Ontinue
+The Silicon Partners
+Bolster Inc
+Ciklum
+Probo Media Technologies
+Simublade
+Acies LLP
+Quantum Asia
+Sri Tech Solutions
+MITYUNG Infotech
+Gventure Technology
+Opentable
+Codalien
+Vistex
+Hobo
+Anblicks
+Skolar EdTech
+CloudCover
+OLX
+Knack Systems
+Systango
+Angara
+Kyvos Insights
+SUSE
+o2one Labs
+StraViso
+SRM Technologies
+Tellabs
+Top Hat
+Code Speedy Technology
+Exness
+Paramatrix Technologies
+Seven Peaks Software 
+Parth Universal
+Wish A Cloud 
+Techsaga
+Write Right
+Rigil
+Echelon Edge
+Vonage
+iTuple Technologies
+Genlnvo
+Pythian 
+Optimite
+Vinsys IT Services
+Xetech
+Xiarch Solutions
+Swisscom
+Beryl Systems
+Nexthink
+Trintech
+Sigtuple
+Caelius Consulting`.split('\n').map(name => name.trim()).filter(name => name);
+            
+            const cleanCompanyName = (name) => {
+                return name
+                    .trim()
+                    .replace(/[\*\-]+$/, '')
+                    .replace(/\s*-?\s*[\w\.-]+@[\w\.-]+\.\w+/, '')
+                    .replace(/\s*-?\s*mailto:/, '')
+                    .replace(/^\d+\.\s*/, '')
+                    .replace(/\s+/g, ' ')
+                    .replace(/[\s\*\-\.,]+$/, '')
+                    .trim();
+            };
+
+            const cleanedCompanies = companyData
+                .map(company => cleanCompanyName(company))
+                .filter(company => {
+                    return company.length > 0 && 
+                           !company.includes('Major IT Hubs') &&
+                           !company.includes('Corridor') &&
+                           !company.includes('IT Hub') &&
+                           !company.includes('IT Zone') &&
+                           !company.includes('IT Belt');
+                });
+
+            const uniqueCompanies = new Map();
+            cleanedCompanies.forEach(company => {
+                const lowerCase = company.toLowerCase();
+                if (!uniqueCompanies.has(lowerCase) || 
+                    company.length > uniqueCompanies.get(lowerCase).length) {
+                    uniqueCompanies.set(lowerCase, company);
+                }
+            });
+            
+
+            const sortedCompanies = Array.from(uniqueCompanies.values())
+                .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
+            const groupedCompanies = {};
+            sortedCompanies.forEach(company => {
+                if (!company || company.length === 0) return;
+                
+                const firstLetter = company.charAt(0).toUpperCase();
+                if (/[A-Z]/.test(firstLetter)) {
+                    if (!groupedCompanies[firstLetter]) {
+                        groupedCompanies[firstLetter] = new Set();
+                    }
+                    groupedCompanies[firstLetter].add(company);
+                }
+            });
+
+            Object.keys(groupedCompanies).forEach(letter => {
+                groupedCompanies[letter] = Array.from(groupedCompanies[letter]);
+            });
+
+            const alphaFilters = document.getElementById('alpha-filters');
+            const letters = Object.keys(groupedCompanies).sort();
+            
+            letters.forEach(letter => {
+                const filterBtn = document.createElement('div');
+                filterBtn.className = 'alpha-filter';
+                filterBtn.textContent = letter;
+                filterBtn.addEventListener('click', () => {
+                    document.getElementById(letter).scrollIntoView({ behavior: 'smooth' });
+                    
+                    document.querySelectorAll('.alpha-filter').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    filterBtn.classList.add('active');
+                });
+                alphaFilters.appendChild(filterBtn);
+            });
+
+            const companyListings = document.getElementById('company-listings');
+            
+            letters.forEach(letter => {
+                const section = document.createElement('div');
+                section.className = 'letter-section';
+                section.id = letter;
+                
+                const heading = document.createElement('h2');
+                heading.className = 'letter-heading';
+                heading.textContent = letter;
+                section.appendChild(heading);
+                
+                const grid = document.createElement('div');
+                grid.className = 'companies-grid';
+                
+                groupedCompanies[letter].forEach(company => {
+                    const card = document.createElement('div');
+                    card.className = 'company-card';
+                    card.setAttribute('data-name', company.toLowerCase());
+                    
+                    const name = document.createElement('div');
+                    name.className = 'company-name';
+                    name.textContent = company;
+                    
+                    const logo = document.createElement('div');
+                    logo.className = 'company-logo';
+                    logo.textContent = company.charAt(0).toUpperCase();
+                    
+                    card.appendChild(logo);
+                    card.appendChild(name);
+                    grid.appendChild(card);
+                });
+                
+                section.appendChild(grid);
+                companyListings.appendChild(section);
+            });
+
+            const addViewSwitcher = () => {
+                const viewBtn = document.createElement('button');
+                viewBtn.id = 'view-toggle';
+                viewBtn.innerHTML = '⊞';
+                viewBtn.title = 'Toggle View';
+                
+                // Store view preference in localStorage
+                const currentView = localStorage.getItem('viewPreference') || 'grid';
+                const grids = document.querySelectorAll('.companies-grid');
+                
+                if (currentView === 'list') {
+                    grids.forEach(grid => grid.classList.add('list-view'));
+                    viewBtn.innerHTML = '≣';
+                }
+                
+                viewBtn.onclick = () => {
+                    grids.forEach(grid => {
+                        grid.classList.toggle('list-view');
+                        const isListView = grid.classList.contains('list-view');
+                        viewBtn.innerHTML = isListView ? '≣' : '⊞';
+                        localStorage.setItem('viewPreference', isListView ? 'list' : 'grid');
+                    });
+                };
+                
+                document.querySelector('.filter-container').appendChild(viewBtn);
+            };
+
+            // Call the function after creating the company listings
+            addViewSwitcher();
+
+            const searchInput = document.getElementById('search');
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const cards = document.querySelectorAll('.company-card');
+                
+                cards.forEach(card => {
+                    const companyName = card.getAttribute('data-name');
+                    if (companyName.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                document.querySelectorAll('.letter-section').forEach(section => {
+                    const visibleCards = section.querySelectorAll('.company-card[style="display: block"]').length;
+                    section.style.display = visibleCards > 0 ? 'block' : 'none';
+                });
+            });
+
+            const backToTopBtn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
