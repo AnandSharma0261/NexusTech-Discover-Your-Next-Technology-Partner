@@ -417,6 +417,154 @@
         #theme-toggle:hover {
             transform: scale(1.1);
         }
+
+        .email-section {
+            margin-top: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+
+        body.dark-theme .email-section {
+            background-color: var(--dark-card);
+        }
+
+        .email-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .email-card {
+            background: linear-gradient(145deg, #ffffff, var(--light-accent));
+            padding: 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        body.dark-theme .email-card {
+            background: linear-gradient(145deg, var(--dark-card), #353535);
+        }
+
+        .email-card:hover .email-copy-btn {
+            opacity: 1;
+        }
+
+        .email-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .email-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .email-details {
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .email-address {
+            font-size: 0.9rem;
+            color: var(--dark-text);
+            word-break: break-all;
+        }
+
+        body.dark-theme .email-address {
+            color: var(--dark-text-primary);
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 32px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, #ffffff, var(--light-accent));
+            padding: 20px 32px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            min-width: 200px;
+        }
+
+        body.dark-theme .stat-card {
+            background: linear-gradient(145deg, var(--dark-card), #353535);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
+        .stat-icon {
+            font-size: 24px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .stat-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .stat-count {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-text);
+        }
+
+        body.dark-theme .stat-count {
+            color: var(--dark-text-primary);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--light-text);
+        }
+
+        body.dark-theme .stat-label {
+            color: var(--dark-text-secondary);
+        }
+
+        @media (max-width: 480px) {
+            .stats-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-card {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
         
         @media (max-width: 768px) {
             .companies-grid {
@@ -460,6 +608,132 @@
                 font-size: 1.5rem;
             }
         }
+
+        .export-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .export-btn {
+            background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+        }
+
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.2);
+        }
+
+        .export-btn i {
+            font-size: 1.2rem;
+        }
+
+        body.dark-theme .export-btn {
+            background: linear-gradient(145deg, var(--dark-card), #353535);
+        }
+
+        .export-tooltip {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .export-tooltip.visible {
+            opacity: 1;
+        }
+
+        .email-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .email-btn {
+            background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+        }
+
+        .email-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.2);
+        }
+
+        .copy-tooltip {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .copy-tooltip.visible {
+            opacity: 1;
+        }
+
+        .email-copy-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .email-copy-btn:hover {
+            background: rgba(0, 180, 216, 0.1);
+        }
+
+        body.dark-theme .email-copy-btn {
+            color: var(--dark-text-primary);
+        }
     </style>
 </head>
 <body>
@@ -471,6 +745,23 @@
             </div>
             <p>Discover Your Next Technology Partner</p>
         </header>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon">🏢</div>
+                <div class="stat-details">
+                    <div class="stat-count" id="company-count">0</div>
+                    <div class="stat-label">Companies</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✉️</div>
+                <div class="stat-details">
+                    <div class="stat-count" id="email-count">0</div>
+                    <div class="stat-label">Email Contacts</div>
+                </div>
+            </div>
+        </div>
         
         <div class="search-container">
             <input type="text" id="search" placeholder="Search for a company...">
@@ -487,9 +778,36 @@
         <div id="no-results" style="display: none; text-align: center; padding: 20px;">
             No companies found matching your search.
         </div>
+
+        <div class="email-section">
+            <h2>Company Contact Emails</h2>
+            <div class="email-container" id="email-listings">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="email-actions">
+            <button class="email-btn" id="exportEmails">
+                <i>📥</i> Export Email List
+            </button>
+            <button class="email-btn" id="copyAllEmails">
+                <i>📋</i> Copy All Emails
+            </button>
+        </div>
+        <div class="copy-tooltip" id="copyTooltip">Copied to clipboard!</div>
+
+        <div class="export-container">
+            <button class="export-btn" id="exportAll">
+                <i>📊</i> Export All Companies
+            </button>
+            <button class="export-btn" id="exportVisible">
+                <i>📋</i> Export Visible Companies
+            </button>
+        </div>
+        <div class="export-tooltip" id="exportTooltip">Export completed!</div>
         
         <footer>
-            <p>&copy; 2025 Tech Company Directory. All rights reserved.</p>
+            <p>&copy; 2025 NesTech. All rights reserved by Anand Sharma.</p>
         </footer>
     </div>
     
@@ -4223,6 +4541,166 @@ Trintech
 Sigtuple
 Caelius Consulting`.split('\n').map(name => name.trim()).filter(name => name);
             
+            const emailData = `hr@akoode.in
+careers@q3tech.com
+careers@cympac.com
+ta@yugensys.com
+careers@noetic-labs.com
+hr@patseer.com
+careers@prometteursolutions.com
+mailto:
+bhavya.sharma@agicent.com
+hr@probuddysoftware.com
+priyanshi.jain@bluetris.com
+Harshit.goyal@benthonlabs.com
+hiring@benthonlabs.com
+roshni.kasturi@americanchase.com
+pooja_mutkiri@persistent.com
+preeti.mishra@mobulous.com
+𝗵𝗿@shivit.com
+Hr@cludgetechnologies.com
+madhukiran.ke@quadranttechnologies.com
+support@datcloudsolutions.com
+preethi.g@amplelogic.com
+ talent.acquisition@delhivery.com
+soumitri@airditsoftware.com
+districthiring@zomato.com
+Nasreen.sk@clarivate.com
+kajal@metadesignsolutions.co.uk
+ShruthiN@fixitytech.com
+career@embrill.com
+ hr@techanicinfotech.com
+ amisha.h@zuaitec.co
+ hr@extramarks.com
+ pallavi.sharma@appventurez.com
+ hr@scalong.com
+resume@inventys.in
+careers@geekyworks.com
+hr@twigsoftwares.com
+ career@dssinfotech.com
+ aastha.d@parangat.com
+careers@dewsolutions.in
+shivani.gupta@squareboat.com
+ naila.sana@benchkart.com/ankita.singh@benchkart.com
+utkarsh@cloudanalogy.com
+Hello@wavexcel.in
+ shilpa.ks@acldigital.com
+careers@lonartech.com
+career@nakshtechnologies.com
+ jobs@zaintontechnologies.com
+hrd-india@magicsoftware.com
+careers@retailware.info
+hr@softlinkinternational.com
+hrd@modular-infotech.com
+careers@innovapoint.com
+hr@sankalpcs.com
+info@websyms.com
+career@deepmindsit.com
+careers@bpointer.com
+hr@Montcrestsoftware.com
+hr@stelotechnology.com
+hr@alohatechnology.com
+hr@patseer.com
+ mkushwaha@teksystems.com
+spapnai@teksystems.com
+hr@opslyft.com 
+alokkumar.sahu@here.com
+careers@atidan.com
+ megha.ghosh@wheelseye.com
+𝗽𝗲𝗼𝗽𝗹𝗲𝗳𝗶𝗿𝘀𝘁@𝗴𝗿𝗲𝗲𝗻𝗵𝗼𝗻𝗰𝗵𝗼𝘀.𝗰𝗼𝗺
+hr@w3villa.com
+ practo -tateam@practo.com
+Jupiter -  careers@jupiter.money
+lambdatest - talent@lambdatest.com
+careers@servify.com
+ talent@chalo.com 
+careers@juspay.in
+divisha.shetty@scripbox.com
+careers@sarvatra.in
+careers@prorigosoftware.com
+careers@biz4solutions.com
+careers@mindstix.com
+hr@weqtechnologies.com
+ prastuti.saxena@sundaylabs.io
+ aditi.gupta@impetus.com
+ hrtechwin24@gmail.com
+ pooja_mutkiri@persistent.com
+
+𝗵𝗿@𝘃𝗶𝗿𝗮𝘀𝗮𝘁𝘀𝗼𝗹𝘂𝘁𝗶𝗼𝗻𝘀.𝗰𝗼𝗺 
+anjali.ghavri@essencetechlabs.com
+avani.sharma@bounteous.com
+	Komal.dixit@amantyatech.com
+	yashika.rohilla@trajectorservices.com
+	vaishali.tyagi@kiwitech.com
+pooja.jassy@amantyatech.com
+	hr@w3villa.com
+	jyotsna.mishra@vinove.com
+ hr@hippoinnovation.com
+	arman.ansari@infobeans.com
+nidhi.sharma@walkingtree.tech
+shruti.jain@salescode.ai
+hr@rannlab.com
+hello@sarvika.com
+recruitment@sketchbrahma.com
+careers@antixxtechhub.com
+careers@theideaslab.com
+careers@antixxtechhub.com
+riya.sharma@anviam.com
+anjali.ghavri@essencetechlabs.com
+careers@q3tech.com
+hr@akoode.in
+𝐧𝐚𝐯𝐲𝐚.𝐦@cloudfulcrum.com
+Careers@aihifusion.com
+nehasingh@northcorpsoftware.com
+hr@telemune.com
+hr@stacknize.com
+aartikhalge@benchmarkit.solutions
+hr@briskminds.com
+Career@successive.tech
+vishu.tamar@gmail.com
+hr@tamarsoftware.in
+careers@spraxa.com
+mohit.kumar@ksolves.com
+ayushi@enveu.com
+recruitment@mtap.in
+sonu.silverspaceinc@gmail.com
+hr@prometteursolutions.com
+akanksha.sogani@perennialsys.com
+akanksha.puri@sourcefuse.com
+shreyag@aeroqube.com
+jobs@aimleap.com
+info@cybermatrixsolutions.com
+hr.gen@techugo.com
+barnita.das@techqware.com
+apply@quark9.com
+hr.gen@techugo.com
+barnita.das@techqware.com
+vishu.tamar@gmail.com
+hr@primathon.in
+hr.mit@mobilyinfotech.com
+hiring@culturex.in
+rashmeet@techglock.com
+hr@hawkscode.com
+hr@unlink-technologies.com
+himani.jadaun@attainetservices.com
+hr@quickwayinfosystems.in
+hr@eduzent.org
+mudita@drabito.com
+ayushi.gupta@walkingtree.tech
+hr@mutewebtechnologies.com.
+ekta@marioxsoftware.com
+hr@panoramasoftware.in
+hr.e2xinfotech@gmail.com
+hr@cfcs.co.in
+kshitij.bhasme@infinitylabs.in
+kanika@staqo.com
+hr@codeblock.co.in
+priyanshim@codeblock.co.in
+careers@quokkalabs.com
+avantika@moondive.com
+akanksha.srivastava@ienergizer.com
+archita.srivastava@thrivingsprings.com`.split('\n').map(email => email.trim()).filter(email => email);
+
             const cleanCompanyName = (name) => {
                 return name
                     .trim()
@@ -4233,6 +4711,14 @@ Caelius Consulting`.split('\n').map(name => name.trim()).filter(name => name);
                     .replace(/\s+/g, ' ')
                     .replace(/[\s\*\-\.,]+$/, '')
                     .trim();
+            };
+
+            const cleanEmail = (email) => {
+                return email
+                    .trim()
+                    .replace(/^mailto:/, '')
+                    .replace(/\s+/g, '')
+                    .toLowerCase();
             };
 
             const cleanedCompanies = companyData
@@ -4255,6 +4741,33 @@ Caelius Consulting`.split('\n').map(name => name.trim()).filter(name => name);
                 }
             });
             
+            const uniqueEmails = new Map();
+            emailData.forEach(email => {
+                const cleanedEmail = cleanEmail(email);
+                if (cleanedEmail && !uniqueEmails.has(cleanedEmail)) {
+                    uniqueEmails.set(cleanedEmail, email);
+                }
+            });
+
+            const sortedEmails = Array.from(uniqueEmails.values())
+                .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
+            // Group emails by domain
+            const groupedEmails = {};
+            sortedEmails.forEach(email => {
+                if (!email || email.length === 0) return;
+                const domain = email.split('@')[1];
+                if (domain) {
+                    if (!groupedEmails[domain]) {
+                        groupedEmails[domain] = new Set();
+                    }
+                    groupedEmails[domain].add(email);
+                }
+            });
+
+            Object.keys(groupedEmails).forEach(domain => {
+                groupedEmails[domain] = Array.from(groupedEmails[domain]);
+            });
 
             const sortedCompanies = Array.from(uniqueCompanies.values())
                 .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
@@ -4331,6 +4844,43 @@ Caelius Consulting`.split('\n').map(name => name.trim()).filter(name => name);
                 companyListings.appendChild(section);
             });
 
+            const emailListings = document.getElementById('email-listings');
+
+            sortedEmails.forEach(email => {
+                const card = document.createElement('div');
+                card.className = 'email-card';
+                card.setAttribute('data-email', email.toLowerCase());
+
+                const icon = document.createElement('div');
+                icon.className = 'email-icon';
+                icon.innerHTML = '✉';
+
+                const details = document.createElement('div');
+                details.className = 'email-details';
+
+                const address = document.createElement('div');
+                address.className = 'email-address';
+                address.textContent = email;
+
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'email-copy-btn';
+                copyBtn.innerHTML = '📋';
+                copyBtn.title = 'Copy Email';
+                copyBtn.addEventListener('click', () => {
+                    navigator.clipboard.writeText(email).then(() => {
+                        const tooltip = document.getElementById('copyTooltip');
+                        tooltip.classList.add('visible');
+                        setTimeout(() => tooltip.classList.remove('visible'), 2000);
+                    });
+                });
+
+                details.appendChild(address);
+                card.appendChild(icon);
+                card.appendChild(details);
+                card.appendChild(copyBtn);
+                emailListings.appendChild(card);
+            });
+
             const addViewSwitcher = () => {
                 const viewBtn = document.createElement('button');
                 viewBtn.id = 'view-toggle';
@@ -4390,18 +4940,26 @@ Caelius Consulting`.split('\n').map(name => name.trim()).filter(name => name);
             const searchInput = document.getElementById('search');
             searchInput.addEventListener('input', () => {
                 const searchTerm = searchInput.value.toLowerCase().trim();
-                const cards = document.querySelectorAll('.company-card');
                 
+                // Search companies
+                const cards = document.querySelectorAll('.company-card');
                 cards.forEach(card => {
                     const companyName = card.getAttribute('data-name').toLowerCase();
                     const shouldShow = searchTerm === '' || 
                                       companyName.includes(searchTerm) || 
                                       companyName.split(' ').some(word => word.startsWith(searchTerm));
-                    
                     card.style.display = shouldShow ? 'flex' : 'none';
                 });
-                
-                // Update section visibility
+
+                // Search emails
+                const emailCards = document.querySelectorAll('.email-card');
+                emailCards.forEach(card => {
+                    const email = card.getAttribute('data-email').toLowerCase();
+                    const shouldShow = searchTerm === '' || email.includes(searchTerm);
+                    card.style.display = shouldShow ? 'flex' : 'none';
+                });
+
+                // Update sections visibility
                 document.querySelectorAll('.letter-section').forEach(section => {
                     const visibleCards = section.querySelectorAll('.company-card[style="display: flex"]').length;
                     section.style.display = visibleCards > 0 ? 'block' : 'none';
@@ -4417,8 +4975,17 @@ Caelius Consulting`.split('\n').map(name => name.trim()).filter(name => name);
 
                 // Show or hide the no-results message
                 const noResults = document.getElementById('no-results');
-                const hasVisibleCards = document.querySelectorAll('.company-card[style="display: flex"]').length > 0;
-                noResults.style.display = hasVisibleCards ? 'none' : 'block';
+                const hasVisibleItems = 
+                    document.querySelectorAll('.company-card[style="display: flex"]').length > 0 ||
+                    document.querySelectorAll('.email-card[style="display: flex"]').length > 0;
+                noResults.style.display = hasVisibleItems ? 'none' : 'block';
+
+                // Update counters based on visible items
+                const visibleCompanies = document.querySelectorAll('.company-card[style="display: flex"]').length;
+                const visibleEmails = document.querySelectorAll('.email-card[style="display: flex"]').length;
+                
+                document.getElementById('company-count').textContent = visibleCompanies.toLocaleString();
+                document.getElementById('email-count').textContent = visibleEmails.toLocaleString();
             });
 
             const backToTopBtn = document.getElementById('back-to-top');
@@ -4432,6 +4999,101 @@ Caelius Consulting`.split('\n').map(name => name.trim()).filter(name => name);
             
             backToTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // After processing companies and emails, update the counters
+            const updateCounters = () => {
+                const companyCount = sortedCompanies.length;
+                const emailCount = sortedEmails.length;
+                
+                // Animate the counters
+                const animateCounter = (element, target) => {
+                    const duration = 1000; // Animation duration in milliseconds
+                    const steps = 50; // Number of steps in animation
+                    const stepValue = target / steps;
+                    let current = 0;
+                    
+                    const updateDisplay = (value) => {
+                        element.textContent = Math.round(value).toLocaleString();
+                    };
+
+                    const step = () => {
+                        current += stepValue;
+                        if (current > target) current = target;
+                        updateDisplay(current);
+                        
+                        if (current < target) {
+                            requestAnimationFrame(step);
+                        }
+                    };
+                    
+                    step();
+                };
+
+                // Update company counter
+                const companyCounter = document.getElementById('company-count');
+                animateCounter(companyCounter, companyCount);
+
+                // Update email counter
+                const emailCounter = document.getElementById('email-count');
+                animateCounter(emailCounter, emailCount);
+            };
+
+            // Call updateCounters after processing data
+            updateCounters();
+
+            // Export functionality
+            const exportToCSV = (data, filename) => {
+                // Add BOM for Excel to correctly detect UTF-8
+                const BOM = "\uFEFF";
+                
+                // Convert data to CSV format
+                const csvContent = BOM + "Company Name,First Letter\n" + 
+                    data.map(company => {
+                        // Escape quotes and special characters
+                        const escapedCompany = company.replace(/"/g, '""');
+                        return `"${escapedCompany}","${company.charAt(0).toUpperCase()}"`;
+                    }).join("\n");
+
+                // Create blob and download link
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                const url = URL.createObjectURL(blob);
+                
+                link.setAttribute('href', url);
+                link.setAttribute('download', filename);
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                
+                link.click();
+                document.body.removeChild(link);
+                
+                // Show tooltip
+                const tooltip = document.getElementById('exportTooltip');
+                tooltip.classList.add('visible');
+                setTimeout(() => tooltip.classList.remove('visible'), 2000);
+            };
+
+            // Export all companies
+            document.getElementById('exportAll').addEventListener('click', () => {
+                const companies = Array.from(document.querySelectorAll('.company-card'))
+                    .map(card => card.querySelector('.company-name').textContent);
+                
+                exportToCSV(companies, `tech_companies_all_${new Date().toISOString().slice(0,10)}.csv`);
+            });
+
+            // Export visible companies
+            document.getElementById('exportVisible').addEventListener('click', () => {
+                const visibleCompanies = Array.from(document.querySelectorAll('.company-card'))
+                    .filter(card => card.style.display !== 'none')
+                    .map(card => card.querySelector('.company-name').textContent);
+                
+                if (visibleCompanies.length === 0) {
+                    alert('No companies to export! Please adjust your search filters.');
+                    return;
+                }
+                
+                exportToCSV(visibleCompanies, `tech_companies_filtered_${new Date().toISOString().slice(0,10)}.csv`);
             });
         });
     </script>
