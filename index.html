@@ -816,7 +816,10 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Original company data from the text file
+            try {
+                console.log('Starting application initialization...');
+                
+                // Original company data from the text file
             const companyData = `IGT Solutions
 Newgen Software 
 FanCraze
@@ -1122,9 +1125,28 @@ arushi.sawhney@e2eresearch.com
 ayush.sinha@sugarboxnetworks.com
 ayush.daryani@niftel.com
 babitha.nambiar@opusconsulting.com
+career@toxsl.com
+hr@inextwebtechnologies.com
+hr@code-brew.com
+ jobs@kaizenus.com
+ hi@infozion.in
+  hrteam@modgenics.com
 ashwini.ashok@eton-solutions.com
+anu.mittal@testingxperts.com
+hr@shethink.in
+ hr@ardsoftech.in
+aviral.pruthi@eshopbox.com
 arun.ravi@ipsoft.com
 avinash@sedintechnologies.com
+HR@SOFITGROW.COM
+hr@agpaytech.co.uk
+hr@xtrox.com
+hr@bvmsolution.com
+join@1pharmacy.io
+ hr@v2infotech.net
+ info@sassyinfotech.com
+ careers@eagleowl.in
+ careers@shoshin.tech
 aswin@psrtek.com
 atin.karmokar@pentagon.co.in
 atul.pal@innefu.com
@@ -1215,6 +1237,7 @@ ankit@compumatrice.com
 anitha.prabhakar@pramati.com
 anjan.bose@hpl.co.in
 anju.tyagi@bpoconvergence.com
+
 anjali@knackforge.com
 asidhwani@cleo.com
 anjalig@mangoapps.com
@@ -1223,6 +1246,7 @@ anjani.salian@in.nbssap.com
 anita@appventurez.com
 anandhi.s@dsmsoft.com
 anitha.davis@incture.com
+founders@unravelcarbon.com
 anirudhan.vasudevan@replicon.com
 akhil@ibhubs.co
 aghosh@trimaxamericas.com
@@ -1278,12 +1302,14 @@ alok.singh@recro.io
 allwyn.r@qbrainx.com
 albino@pixis.ai
 akriti@elsner.in
-ta@yugensys.com
+ta@yugensys
+ hr@klientotech.com
 careers@noetic-labs.com
+hr@zynapte.com 
+hr@togetherv.com
  shashi.kant@recruiter.nlbtech.com
 hr@patseer.com
 careers@prometteursolutions.com
-mailto:
 bhavya.sharma@agicent.com
 hr@probuddysoftware.com
 priyanshi.jain@bluetris.com
@@ -1313,13 +1339,46 @@ hr@fourbrick.com
 connect@deftboxsolutions.com
  info@skylineinfosys.com
  career@appinventiv.com
- shukla.akansha@fincart.com
- hr@startxlabs.com
-hr@netsetsoftware.com
-careers@talentelgia.com
-hr@code-brew.com
-hr@zopflix.com
-career@technogravity.com
+  jobs@klizos.com
+hr@datansh.com
+career.web@tradeboox.com
+ career@exdera.com
+info@athh.co
+career@webearl.com
+career@CurlyBrackets.co.in
+hr@codesfortomorrow.com
+ resume@bestpeers.com
+hr@scrimatec.com
+ support108@mudracircle.in
+ info@efficacious.in
+ hr@samyotech.com
+ hr@duplextech.com
+hr@bigscal.com
+hr@erience.co
+career@hkinfosoft.com
+ hr@zappkode.com
+ khushboo.chandurkar@intimetec.com
+ hr@hack2skill.com
+  hr@alphawizz.com
+hr@quantasis.com
+ hr@shineinfosoft.in
+ hr@clagtech.com
+ hr@nxginfosystem.com
+ career@sufalamtech.com
+ hr@terbaiks.com
+ jobs@vayve.in
+  careers@dcoder.tech
+careers@aexonic.com
+hr@deepit.com
+ careers@featherthreadcorp.com
+hr@beactinfotech.com
+jobs@rkwebsolutions.com
+ tateam@moglix.com
+ careers@fridaymediagroup.com
+talent@softedge.in
+hr@koolmind.in
+sp@elucidata.io
+ hr@emizentech.com
 nitikasadele@easycommerceapps.com
 careers@inarostechnologies.com
 rizwan@coginsystech.com
@@ -1403,51 +1462,6 @@ prakashgupta@proctur.com
 	komal@warpdrivetech.in
  kamini@chawtechsolutions.com
  tanyadua51@gmail.com
- hr@dronainfotech.com
-  santwana@sansoftwares.com
-hr@appbaytech.com
-milanhrdept@arysontechnologies.com
-akshidubey@hotmail.com
-kanchan.bhargava@hastree.com
-hr@hastree.com
-rashmi.girhe@afourtech.com
-sreemaneesh@vmokshagroup.com
-divya.naveen@optym.com
-hr@braintechnosys.com
- dnyaneshwari.oytie@gmail.com
-career@appsuccessor.com
-shikha.bhattacharya@techolution.com
- hr@wisdominfosoft.com
-jobs@aimleap.com
-neeraj22@gmail.com
-info@prakharsoftwares.com
-jobs@numetry.in
- aishwaryaa.ganesh@techolution.com
-punitidm@gmail.com
-careers@guavatrees.com
-ashwini@niyatainfotech.com
-sneha.emani@quadranttechnologies.com
-brahmaryampm21@gmail.com  
- careers@avekshaa.com
- hr@servosys.com
-soumitri@airditsoftware.com
-hr@checkboxtechnology.com
-recruitment@qio.io
-careers@falconfs.com
-hr@adjecti.com
-preeti@cadence.com
-career@vidooly.com
-hr@amysoftech.in
-hr@18thdigitech.com
-hi@onebanc.ai
-Careers@chromeinfotech.com
-info@algowith.com
-info@gensofts.net
-hr@brainmobi.com
-info@99apptechnologies.com
-info@vspagy.com
-campus@coforge.com
-hr@telemune.com
 hr.team@inmovidutech.com
 districthiring@zomato.com
 hr@cfcs.co.in
@@ -1491,6 +1505,30 @@ ShruthiN@fixitytech.com
 careers@quokkalabs.com
 career@embrill.com
 hr@unikon.ai
+//
+ careers@zamp.ai
+ talent@humancloud.co.in
+ vanshika@himcos.com
+ roshniishwe.emaster@gmail.com
+ careers@getsaral.com
+ hr@keylogicinfotech.com
+ hiring@procol.in
+ monika.mukhija@fantv.ir
+ hr@avologypro.com
+ info@zinnsoft.in
+ shreya.tameta@gmail.com
+ careers@antino.com
+ hr@kshetrapati.com
+ divya.sharma@anviam.com
+ akanksha@peregrine-it.com
+ hr@stacknize.com
+ nehadhimanducktaleit@gmail.com
+ nidhisundrela@thoughtwin.com
+ hr@vqcodes.com
+ hr@webzent.com
+ anshul.porwal@impetus.com
+ hr@prometteursolutions.com
+ hr.futurelens@gmail.com
 hr.kudrat@recenturesoft.com
 pooja.jassy@amantyatech.com
 careers@maxbytetech.com
@@ -1502,7 +1540,7 @@ career@konstantinfo.com
 hr@webseeder.in
 HR@liberintechnologies
 saloni@appzglobaltech.com
-
+//
 shubha@primafelicitas.com
 hiring@creatiosoft.com
 career@konstantinfo.com
@@ -1533,6 +1571,7 @@ hr@arivani.com
 resume@inventys.in
 careers@geekyworks.com
 hr@twigsoftwares.com
+//
  career@dssinfotech.com
  aastha.d@parangat.com
 careers@dewsolutions.in
@@ -1583,6 +1622,7 @@ jaswant.singh@q1tech.com
 mansi@proascend.in
 info@ditserv.com
 hr@velsof.com
+//
 jaswant.singh@q1tech.com
 seema@avissol.com
 career@realtyassistant.in
@@ -1604,6 +1644,8 @@ careers@bpointer.com
 hr@Montcrestsoftware.com
 hr@stelotechnology.com
 hr@alohatechnology.com
+
+//
 hr@patseer.com
  support@snapbuy.online
  mkushwaha@teksystems.com
@@ -1662,6 +1704,8 @@ michelle.tradle@orahi.com
 ninad.shetye@sigmoidfrogs.com
 kiruthika@aveoninfotech.com
 jobs@excellencetechnologies.in
+
+//
 ridhima.dass@austere.co.in
 hr@aptclouds.com
 hr@pedalsup.com
@@ -1721,6 +1765,8 @@ careers@telesys.com
 jyotisinghec@gmail.com
 careers@geminisolutions.com
 jobs@inurture.co.in
+
+//
 shruti.jain@salescode.ai
 hr@rannlab.com
 hello@sarvika.com
@@ -1732,8 +1778,14 @@ riya.sharma@anviam.com
 anjali.ghavri@essencetechlabs.com
 careers@q3tech.com
 hr@akoode.in
+
+
 𝐧𝐚𝐯𝐲𝐚.𝐦@cloudfulcrum.com
 Careers@aihifusion.com
+shubhangi.srivastava@statiq.in
+utkarsh.hingwan@sapidblue.com
+hrhelpdesk@myndsol.com
+//
 nehasingh@northcorpsoftware.com
 hr@ripenapps.com
 hr@telemune.com
@@ -1747,6 +1799,7 @@ careers@spraxa.com
 mohit.kumar@ksolves.com
 ayushi@enveu.com
 recruitment@mtap.in
+//
 sonu.silverspaceinc@gmail.com
 hr@prometteursolutions.com
 akanksha.sogani@perennialsys.com
@@ -1761,7 +1814,12 @@ hr.gen@techugo.com
 barnita.das@techqware.com
 vishu.tamar@gmail.com
 career@altudo.co
+//
 careers@minditsystems.com
+hr@gainserv.com
+sakshi.goswami@walkingtree.tech
+recruitment@shashwathsolution.com
+ jashu.sinha@codersbrain.com
 careers@incedoinc.com
 priyanka.sarawagi@hashouttech.com
 careers@think201.com
@@ -1786,7 +1844,7 @@ Jobs@synapseindia.com
 career@claritusconsulting.com
 hr@rginfotech.co.in
 rashi@huntingcube.com
-
+//
 hiring@ansits.com
 hr@troology.com
 careers@techaheadcorp.com
@@ -1878,13 +1936,21 @@ tandrima.bhunia@artechinfo.in
 tandrimabhunia@gmail.com
 hr@greendzine.in
 hr@quintustech.co.in
+//
 kalpana.wadhwani@scriptshub.net
 hr@vqcodes.com
 neeru@appsquadz.com
 nimy@finoit.com
+ shivani.henceforth@gmail.com
+  jobs@thinkwik.com
+  hr@stegowl.in
+  careers@elecbits.in
+   hr@techanicinfotech.com
+hr@thinkwik.com
 tinydevil.nimy@gmail.com
 careers@telesys.com
 hr@innotical.com
+//
 hi@infozion.in
 careers@tavant.com
 hr@abym.in
@@ -1911,6 +1977,7 @@ hr@klientotech.com
 devender.singh@sigmoidanalytics.com
 careers@novnex.com
 aman.raj@hashstudioz.com
+//
 mehakpreet.manocha@hashstudioz.com
 pooja.katyal@paynways.com
 saumya.pandey@9yardstechnology.com
@@ -1919,8 +1986,13 @@ ghulam.kashif@hexaviewtech.com
 hr@w3villa.com
 hire@muoro.com
 happyhuman@kugelblitz.xyz
+hr@postgrid.com
+careers@agneyas.com
 
 gaurav.bajaj@speckyfox.com
+hr@evangelisttechnology.com
+careers@flynaut.com
+ info@strainatech.com
 ambika.c@360degreecloud.com
 kavita.gusain@agicent.com
 rupam.kumari@innovationm.com
@@ -1995,11 +2067,31 @@ archita.srivastava@thrivingsprings.com`.split('\n').map(email => email.trim()).f
             };
 
             const cleanEmail = (email) => {
-                return email
-                    .trim()
-                    .replace(/^mailto:/, '')
-                    .replace(/\s+/g, '')
-                    .toLowerCase();
+                try {
+                    if (!email || typeof email !== 'string') {
+                        return null;
+                    }
+                    
+                    let cleaned = email
+                        .trim()
+                        .replace(/^mailto:/, '')
+                        .replace(/\s+/g, '')
+                        .toLowerCase();
+                    
+                    // Remove any special unicode characters and normalize
+                    cleaned = cleaned.replace(/[^\x00-\x7F]/g, "");
+                    
+                    // Basic email validation
+                    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    if (!emailRegex.test(cleaned)) {
+                        return null;
+                    }
+                    
+                    return cleaned;
+                } catch (error) {
+                    console.warn('Error processing email:', email, error);
+                    return null;
+                }
             };
 
             const cleanedCompanies = companyData
@@ -2023,32 +2115,60 @@ archita.srivastava@thrivingsprings.com`.split('\n').map(email => email.trim()).f
             });
             
             const uniqueEmails = new Map();
-            emailData.forEach(email => {
-                const cleanedEmail = cleanEmail(email);
-                if (cleanedEmail && !uniqueEmails.has(cleanedEmail)) {
-                    uniqueEmails.set(cleanedEmail, email);
+            try {
+                emailData.forEach((email, index) => {
+                    try {
+                        const cleanedEmail = cleanEmail(email);
+                        if (cleanedEmail && cleanedEmail.length > 0 && !uniqueEmails.has(cleanedEmail)) {
+                            uniqueEmails.set(cleanedEmail, cleanedEmail);
+                        }
+                    } catch (error) {
+                        console.warn(`Error processing email at index ${index}:`, email, error);
+                    }
+                });
+            } catch (error) {
+                console.error('Error processing emails:', error);
+                // Show user-friendly error message
+                const emailSection = document.querySelector('.email-section');
+                if (emailSection) {
+                    const errorMsg = document.createElement('div');
+                    errorMsg.style.cssText = 'color: red; padding: 20px; text-align: center; background: #ffe6e6; border-radius: 8px; margin: 20px 0;';
+                    errorMsg.innerHTML = '<strong>Error processing emails</strong><br>Some email data could not be processed. Displaying available emails.';
+                    emailSection.appendChild(errorMsg);
                 }
-            });
+            }
 
             const sortedEmails = Array.from(uniqueEmails.values())
                 .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
-            // Group emails by domain
+            // Group emails by domain with error handling
             const groupedEmails = {};
-            sortedEmails.forEach(email => {
-                if (!email || email.length === 0) return;
-                const domain = email.split('@')[1];
-                if (domain) {
-                    if (!groupedEmails[domain]) {
-                        groupedEmails[domain] = new Set();
+            try {
+                sortedEmails.forEach(email => {
+                    if (!email || email.length === 0) return;
+                    
+                    try {
+                        const parts = email.split('@');
+                        if (parts.length !== 2) return;
+                        
+                        const domain = parts[1];
+                        if (domain && domain.includes('.')) {
+                            if (!groupedEmails[domain]) {
+                                groupedEmails[domain] = new Set();
+                            }
+                            groupedEmails[domain].add(email);
+                        }
+                    } catch (error) {
+                        console.warn('Error grouping email:', email, error);
                     }
-                    groupedEmails[domain].add(email);
-                }
-            });
+                });
 
-            Object.keys(groupedEmails).forEach(domain => {
-                groupedEmails[domain] = Array.from(groupedEmails[domain]);
-            });
+                Object.keys(groupedEmails).forEach(domain => {
+                    groupedEmails[domain] = Array.from(groupedEmails[domain]);
+                });
+            } catch (error) {
+                console.error('Error grouping emails by domain:', error);
+            }
 
             const sortedCompanies = Array.from(uniqueCompanies.values())
                 .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
@@ -2127,40 +2247,69 @@ archita.srivastava@thrivingsprings.com`.split('\n').map(email => email.trim()).f
 
             const emailListings = document.getElementById('email-listings');
 
-            sortedEmails.forEach(email => {
-                const card = document.createElement('div');
-                card.className = 'email-card';
-                card.setAttribute('data-email', email.toLowerCase());
+            try {
+                sortedEmails.forEach((email, index) => {
+                    try {
+                        if (!email || email.length === 0) return;
+                        
+                        const card = document.createElement('div');
+                        card.className = 'email-card';
+                        card.setAttribute('data-email', email.toLowerCase());
 
-                const icon = document.createElement('div');
-                icon.className = 'email-icon';
-                icon.innerHTML = '✉';
+                        const icon = document.createElement('div');
+                        icon.className = 'email-icon';
+                        icon.innerHTML = '✉';
 
-                const details = document.createElement('div');
-                details.className = 'email-details';
+                        const details = document.createElement('div');
+                        details.className = 'email-details';
 
-                const address = document.createElement('div');
-                address.className = 'email-address';
-                address.textContent = email;
+                        const address = document.createElement('div');
+                        address.className = 'email-address';
+                        address.textContent = email;
 
-                const copyBtn = document.createElement('button');
-                copyBtn.className = 'email-copy-btn';
-                copyBtn.innerHTML = '📋';
-                copyBtn.title = 'Copy Email';
-                copyBtn.addEventListener('click', () => {
-                    navigator.clipboard.writeText(email).then(() => {
-                        const tooltip = document.getElementById('copyTooltip');
-                        tooltip.classList.add('visible');
-                        setTimeout(() => tooltip.classList.remove('visible'), 2000);
-                    });
+                        const copyBtn = document.createElement('button');
+                        copyBtn.className = 'email-copy-btn';
+                        copyBtn.innerHTML = '📋';
+                        copyBtn.title = 'Copy Email';
+                        copyBtn.addEventListener('click', () => {
+                            try {
+                                navigator.clipboard.writeText(email).then(() => {
+                                    const tooltip = document.getElementById('copyTooltip');
+                                    if (tooltip) {
+                                        tooltip.classList.add('visible');
+                                        setTimeout(() => tooltip.classList.remove('visible'), 2000);
+                                    }
+                                }).catch(err => {
+                                    console.warn('Clipboard write failed, using fallback:', err);
+                                    // Fallback for older browsers
+                                    const textArea = document.createElement('textarea');
+                                    textArea.value = email;
+                                    document.body.appendChild(textArea);
+                                    textArea.select();
+                                    document.execCommand('copy');
+                                    document.body.removeChild(textArea);
+                                });
+                            } catch (error) {
+                                console.error('Error copying email:', error);
+                            }
+                        });
+
+                        details.appendChild(address);
+                        card.appendChild(icon);
+                        card.appendChild(details);
+                        card.appendChild(copyBtn);
+                        emailListings.appendChild(card);
+                    } catch (error) {
+                        console.warn(`Error creating email card for: ${email}`, error);
+                    }
                 });
-
-                details.appendChild(address);
-                card.appendChild(icon);
-                card.appendChild(details);
-                card.appendChild(copyBtn);
-                emailListings.appendChild(card);
-            });
+            } catch (error) {
+                console.error('Error creating email listings:', error);
+                const errorMsg = document.createElement('div');
+                errorMsg.style.cssText = 'color: red; padding: 20px; text-align: center; background: #ffe6e6; border-radius: 8px; margin: 20px 0;';
+                errorMsg.innerHTML = '<strong>Error displaying emails</strong><br>Unable to display email listings. Please refresh the page.';
+                emailListings.appendChild(errorMsg);
+            }
 
             const addViewSwitcher = () => {
                 const viewBtn = document.createElement('button');
@@ -2376,6 +2525,35 @@ archita.srivastava@thrivingsprings.com`.split('\n').map(email => email.trim()).f
                 
                 exportToCSV(visibleCompanies, `tech_companies_filtered_${new Date().toISOString().slice(0,10)}.csv`);
             });
+            
+            console.log('Application initialization completed successfully.');
+            } catch (error) {
+                console.error('Critical error during application initialization:', error);
+                // Display user-friendly error message
+                const body = document.body;
+                const errorDiv = document.createElement('div');
+                errorDiv.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: #ff4444;
+                    color: white;
+                    padding: 20px;
+                    border-radius: 8px;
+                    z-index: 9999;
+                    text-align: center;
+                    max-width: 400px;
+                `;
+                errorDiv.innerHTML = `
+                    <h3>Application Error</h3>
+                    <p>An error occurred while loading the application. Please refresh the page.</p>
+                    <button onclick="location.reload()" style="background: white; color: #ff4444; border: none; padding: 10px 20px; border-radius: 4px; margin-top: 10px; cursor: pointer;">
+                        Refresh Page
+                    </button>
+                `;
+                body.appendChild(errorDiv);
+            }
         });
     </script>
 </body>
